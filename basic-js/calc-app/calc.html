@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+<body>
+    <div class="app" >
+        <h1>Calculator</h1>
+
+        <fieldset>
+            <input 
+                    type="text" 
+                    placeholder="enter a number" 
+                    id="numberTextBox"/>
+    
+            <button  id="addButton">Add To List</button>
+            <button onclick="clear();">Clear</button>
+            <button onclick="reset();">Reset</button>
+        </fieldset>
+
+        <fieldset>
+            <legend>Operations</legend>
+            <button id="sumButton">Sum</button>  
+            <button id="averageButton">Average</button>
+            <button id="minButton">Min</button>
+        </fieldset>
+
+        <fieldset>
+            <legend>Number List</legend>
+            <ul id="numberList">
+                
+            </ul>
+            <button id="refreshButton">Refresh</button>
+        </fieldset>
+
+
+        <fieldset>
+            <legend>Console</legend>
+            <div id="console">
+                   
+            </div>
+        </fieldset>
+
+
+    </div>
+
+    <script src="calc.js"></script>
+
+    
+</body>
+</html>
