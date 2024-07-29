@@ -22,7 +22,7 @@ function addToList(){
 function clear(){
     //console.log('calling clear');
     alert('Clearning!');
-    
+
     console.innerHTML=`<p>Clearing</p>`;
     numberTextBox.value='';
     numberList.innerHTML='';
@@ -31,7 +31,7 @@ function clear(){
 
 function reset(){
     console.innerHTML=`<p>Resetting</p>`;
-    clear();
+    //clear();
     //also remove from the memory
     numbers=[];
 }
