@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="app" >
@@ -16,15 +17,15 @@
                     id="numberTextBox"/>
     
             <button  id="addButton">Add To List</button>
-            <button onclick="clear();">Clear</button>
+            <button onclick="clearUI();">Clear</button>
             <button onclick="reset();">Reset</button>
         </fieldset>
 
         <fieldset>
             <legend>Operations</legend>
-            <button id="sumButton">Sum</button>  
-            <button id="averageButton">Average</button>
-            <button id="minButton">Min</button>
+            <button onclick="handleSum();" id="sumButton">Sum</button>  
+            <button onclick="handleAverage();" id="averageButton">Average</button>
+            <button onclick="handleMin()" id="minButton">Min</button>
         </fieldset>
 
         <fieldset>
@@ -32,7 +33,7 @@
             <ul id="numberList">
                 
             </ul>
-            <button id="refreshButton">Refresh</button>
+            <button onclick="refresh()" id="refreshButton">Refresh</button>
         </fieldset>
 
 
