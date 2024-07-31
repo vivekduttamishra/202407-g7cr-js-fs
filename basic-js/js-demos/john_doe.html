@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        'use strict';
+        
+        function show() { 
+            count=0;
+            console.log('name',this.name) 
+        }
+        show(); //window.name == undefined.
+
+        var name = 'John Doe'; //window.name='J'
+        show();
+
+    </script>
+
+</body>
+
+</html>
