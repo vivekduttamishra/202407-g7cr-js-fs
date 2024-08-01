@@ -1,0 +1,6 @@
+.delete-button{
+    background-color: coral;
+    border-radius: 50%;
+    box-shadow: -2px -2px 2px gray;
+    margin:2px;
+}

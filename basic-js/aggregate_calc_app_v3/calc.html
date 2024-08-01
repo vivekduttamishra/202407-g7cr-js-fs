@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body onload="app.handleStartup()">
+    <div class="app" >
+        <h1>Calculator</h1>
+
+        <fieldset>
+            <input 
+                    type="text" 
+                    placeholder="enter a number" 
+                    id="numberTextBox"/>
+    
+            <button  onclick="app.handleAddToList()">Add To List</button>
+            <button onclick="app.handleClearUI();">Clear</button>
+            <button onclick="app.handleReset();">Reset</button>
+        </fieldset>
+
+        <fieldset>
+            <legend>Operations</legend>
+            <button onclick="app.handleSum();" id="sumButton">Sum</button>  
+            <button onclick="app.handleAverage();" id="averageButton">Average</button>
+            <button onclick="app.handleMin()" id="minButton">Min</button>
+        </fieldset>
+
+        <fieldset>
+            <legend>Number List</legend>
+            <ul id="numberList">
+                
+            </ul>
+            <button onclick="app.handleRefresh()" id="refreshButton">Refresh</button>
+        </fieldset>
+
+
+        <fieldset>
+            <legend>Console</legend>
+            <div id="console">
+                   
+            </div>
+        </fieldset>
+
+
+    </div>
+
+    <script src="calc.js"></script>
+    <script src="ui.js"></script>
+    <script src="app.js"></script>
+
+    
+</body>
+</html>

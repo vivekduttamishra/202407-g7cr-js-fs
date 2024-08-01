@@ -102,10 +102,6 @@ function average() {
 }
 
 
-
-
-
-
 function handleAverage(){
    
     var average=average();
