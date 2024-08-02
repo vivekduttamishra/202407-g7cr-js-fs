@@ -1,13 +1,16 @@
 
-
+function infixFormatter(value1, operator, value2, result){
+    return `${value1} ${operator} ${value2} = ${result}`;
+}
 
 
 class Calculator{
-    constructor(presenter){
+    constructor(presenter,formatter){
         this.operators={};
         this.addDefaultOperators();
 
         this.presenter=presenter || console.log;
+        this.formatter=formatter || infixFormatter;
     }
 
     addDefaultOperators(){
@@ -33,6 +36,10 @@ class Calculator{
         this.presenter=presenter;
     }
 
+    setFormatter(formatter){
+        this.formatter=formatter;
+    };
+
 
     execute(value1,operatorName, value2){
         if(this.operators[operatorName]){
@@ -43,8 +50,8 @@ class Calculator{
             var result=operator(value1,value2);
 
             //Step #3 Format the output
-            var output=`${value1} ${operatorName} ${value2} = ${result}`;
-
+            //var output=`${value1} ${operatorName} ${value2} = ${result}`;
+            var output= this.formatter(value1,operatorName,value2,result);
             //Step #4 Present the result
             // hard coded dependency on console.
             //console.log(output);
@@ -74,4 +81,4 @@ function testCalculator(){
     calc.execute(10,"mod",4);
 }
 
-testCalculator();
+//testCalculator();

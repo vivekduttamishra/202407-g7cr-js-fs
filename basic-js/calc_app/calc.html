@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+</head>
+<body onload="app.initialize()">
+    <div class="calculator">
+        <h1>Calculator</h1>
+        <input type="number" value="20" id="num1" placeholder="Enter first number">
+        <input type="number" value="30" id="num2" placeholder="Enter second number">
+        <select id="operators">
+            <option value="plus">Plus</option>
+            <option value="minus">Minus</option>
+            <option value="multiply">Multiply</option>
+            <option value="divide">Divide</option>
+        </select>
+
+        <select id="formatters" onchange="app.handleFormatterSelection()">
+
+        </select>
+        
+        <select id="presenters" onchange="app.handlePresenterSelection()">
+
+        </select>
+
+
+        <button onclick="app.handleCalculate()" >Calculate</button>
+
+        <fieldset >
+            <legend>Result</legend>
+            <p id="result" >
+                Result Here
+
+            </p>
+
+        </fieldset>
+        <input id="resultBox"/>
+        
+    </div>
+
+    <script src="calc.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
