@@ -45,6 +45,7 @@ var app=(function (){
         calculator.setPresenter(presenters.result);
 
         calculator.addOperator((x,y)=>x%y,"mod");
+        calculator.addOperator(Math.pow);
         
         //initialize
         resultTextBox.innerHTML="";

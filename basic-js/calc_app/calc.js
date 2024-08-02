@@ -69,16 +69,10 @@ class Calculator{
     }
 }
 
-function testCalculator(){
-    var calc=new Calculator();
-    calc.execute(10,"plus",5);
-    calc.execute(10,"minus",5);
-
-    calc.setPresenter( output=> console.log(`*** ${output} ***`) );
-
-    calc.execute(10,"multiply",5);
-    calc.execute(10,"divide",4);
-    calc.execute(10,"mod",4);
+try{
+    //export elements only for nodejs.
+    module.exports.Calculator = Calculator;
+    console.log('Welcome to NodeJS');
+}catch(e){
+    console.log('Welcome to browser based application');
 }
-
-//testCalculator();
