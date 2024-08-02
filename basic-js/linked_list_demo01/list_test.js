@@ -38,5 +38,13 @@ list.remove(0); //20
 
 console.log('list.toString()',list.toString());
 
+list.insert(0,100);
+
+list.insert(2,50);
+list.insert(2,80);
+list.insert(2,90);
+
+console.log('list.toString()',list.toString());
+
 
 

@@ -45,7 +45,30 @@ class LinkedList{
     }
 
     insert(index, item){
-        //insert item at given index
+        //step#1 is index valid?
+        if(index>=this.length())
+            throw new Error(`Invalid Index: ${index}. Valid indiced: [0-${this.length()-1}]`);
+
+        //step#2 create new node
+        var newNode=new Node(item);
+
+        //step#3.1 insert at the begining.
+        if(index==0){
+            newNode.next=this.first;
+            this.first=newNode;
+            return ;
+        }
+
+        //step#3.2 insert at other indices
+        //locate index-1 node
+        var n=this.first;
+        for(var i=0;i<index-1;i++)
+            n=n.next;
+
+        //insert the new node after n
+        newNode.next=n.next;
+        n.next=newNode;
+        
     }
 
     length(){
