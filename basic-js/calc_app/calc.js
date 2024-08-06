@@ -45,7 +45,7 @@ class Calculator{
         if(this.operators[operatorName]){
             //Step #1 Find operator
             var operator=this.operators[operatorName];
-
+ 
             //Step #2 Do Calculation
             var result=operator(value1,value2);
 

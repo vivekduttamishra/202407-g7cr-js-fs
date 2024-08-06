@@ -136,6 +136,52 @@ class LinkedList {
         
     }
 
+
+
+    findAll(matcher){
+        var result = new LinkedList();
+        
+        for(var n=this._first;n; n = n.next){
+            var data=n.data;
+
+            //if(data.author===author)
+            if( matcher(data))
+                result.append(data);
+        }
+
+        return result;
+    }
+
+    map(converter){
+        var result=new LinkedList();
+        
+        for(var n=this._first;n; n = n.next){
+            var data=converter(n.data);
+            result.append(data);
+        }
+
+        return result;
+    }
+
+    forEach(action){
+        for(var n=this._first;n; n = n.next){
+            action(n.data);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     find(isMatch){
         var result=new LinkedList();
     

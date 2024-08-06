@@ -25,7 +25,7 @@ function Calculator() {
             console.log(output);
         } else {
             console.log(`Invalid operation ${opr}`);
-        }
+        }  
 
     }
 
