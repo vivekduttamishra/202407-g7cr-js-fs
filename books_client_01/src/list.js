@@ -1,4 +1,9 @@
-
+class Node{
+    constructor(value,next=null) {
+        this.value = value;
+        this.next = next;
+    }
+}
 
 class LinkedList {
 
@@ -29,10 +34,12 @@ class LinkedList {
     }
 
     _append(value) {
-        var newNode = {
-            value: value,
-            next: null
-        };
+        // var newNode = {
+        //     value: value,
+        //     next: null
+        // };
+
+        var newNode = new Node(value);
 
         if (this.isEmpty())
             this._first = newNode;
@@ -80,23 +87,88 @@ class LinkedList {
     }
 
     insert(index, value) {
-
-        var n = this._locate(index - 1);
+        index= this._validateIndex(index);
+        
+        var newNode=new Node(value);
+        
+        
+        if(index===0){
+            newNode.next=this._first;
+            this._first=newNode;
+        }else{
+            var n = this._locate(index - 1);
+            newNode.next=n.next;
+            n.next=newNode;
+        }
+        this._size++;
+        
     }
 
     remove(index) {
-        //this._validateIndex(index);
+        this._validateIndex(index);
         var p = this._locate(index - 1);
         console.log('p', p);
 
         //now remove p.next
         p.next = p.next.next;
 
+        return p.value;
+
     }
+
+    toString(){
+        var str="LinkedList(\t";
+        for(var n=this._first; n ;  n = n.next){
+            str+=n.value+"\t";
+        }
+
+        return str+")";
+    }
+
+    forEach(execute){
+        var i=0;
+        for(var n=this._first; n ;  n = n.next){
+            execute(n.value,i);
+            i++;
+        }
+    }
+
+    filter(matcher){
+        var result=new LinkedList();
+
+        this.forEach( v=>{
+            if(matcher(v)){
+                result.append(v);
+            }
+        });
+
+        return result;
+    }
+
+    find(matcher){
+        for(var n=this._first;n!=null;n=n.next){
+            if(matcher(n.value)){
+                return n.value;
+            }
+        }
+    }
+
+    map(mapper){
+        var result=new LinkedList();
+
+        this.forEach( v=>{
+            result.append(mapper(v));
+        });
+
+        return result;
+    }
+
 
 }
 
-var list = new LinkedList(1, 2, 3, 4, 5); //empty list
+try{
+    module.exports.LinkedList=LinkedList;
+    module.exports.Node=Node;
+}catch(e){
 
-
-list.remove(5);
+}
