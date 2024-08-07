@@ -49,12 +49,24 @@
 
                     
 
+                    //for initial DOM elements
                     $("p")
-                        .on("click", function(){
+                        .click( function(){
                         //this even will appply to each paragraph
                         //when a given para is click I want to do something with that para only.
                         //I need to know the current paragaraph I am working on.
                         $(this).hide(1200);
+                    });
+
+
+                    //watch for new element changes only inside the div
+                    $("#summary")
+                        .on("click","p", function(){
+                        //this even will appply to each paragraph
+                        //when a given para is click I want to do something with that para only.
+                        //I need to know the current paragaraph I am working on.
+                        $(this).fadeOut(1000);
+                        $(this).remove();
                     });
 
                     
