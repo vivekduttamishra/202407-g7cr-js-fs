@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1>Welcome to JQuery</h1>
+
+    <p>I am The First Paragraph</p>
+    <p>I am the second Paragraph</p>
+    <p>I am the third Para and I contain somete <span class='important'>Important</span> messages that you must see</p>
+    <p class="important">I am a very importan paragraph</p>
+    <span>I am just a humble span.</span>
+    <p>I am the last paragraph</p>
+
+    <hr>
+
+    <fieldset>
+        <legend>Summary</legend>
+    
+        <div id="summary">
+            
+        </div>
+    </fieldset>
+    <hr/>
+    <button onclick="app.handleGreet()">Greet</button>
+    <button onclick="app.handleCountPara()">Count Para</button>
+    <button onclick="app.handleClearSummary()">Clear Summary</button>
+    <button onclick="app.handleHighlightImportant()">Highlight Important</button>
+    <button onclick="app.handleHidePara()">Hide Paragraph</button>
+    <button onclick="app.handleShowPara()">Show Paragraph</button>
+    <button onclick="app.handleTogglePara()">Toggle Paragraph</button>
+    <button id="enabler" onclick="app.handleEnableParaClick()">Enable Para Click</button>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <script>
+        var app=(function(){
+
+
+            var summary=$("#summary");
+            
+            var handleEnableParaClick=()=>{
+                    $("p").css("cursor", "pointer");
+                    $("#enabler").fadeOut(1000);
+
+                    
+
+                    $("p")
+                        .on("click", function(){
+                        //this even will appply to each paragraph
+                        //when a given para is click I want to do something with that para only.
+                        //I need to know the current paragaraph I am working on.
+                        $(this).hide(1200);
+                    });
+
+                    
+
+                    
+            };
+
+            //document on load function
+
+            $(handleEnableParaClick);
+
+            
+            return {
+                handleGreet: function(){
+                    //document.getElementById("summary").innerHTML="Welcome to JQuery!";
+                    //jQuery("#summary").html('Welcome to Real JQuery!');
+                    summary.html('Welcome to Real $!');
+                },
+                handleClearSummary: ()=>{
+                    summary.empty();
+                },
+                handleCountPara: ()=>{
+                    var paras=$("p");
+
+                    //summary.append(`<p>Total Paras: ${paras.length}</p>`);
+                    summary.prepend(`<p>Total Paras: ${paras.length}</p>`);
+                },
+                handleHighlightImportant: ()=>{
+                    $(".important")
+                        .css({
+                            "background-color": "yellow",                            
+                        });
+                },
+                handleHidePara:()=>{
+                    //$("p").hide(500);
+                    $("p").slideUp(500);
+                },
+                handleShowPara:()=>{
+                    //$("p").show(500);
+                    $("p").slideDown(500);
+                },
+                handleTogglePara:()=>{
+                    //$("p").toggle(1000);
+                    $("p").fadeToggle(1000);
+                    //$("p").slideToggle(1000); 
+                },
+                
+            }
+
+        })();
+
+
+    </script>
+</body>
+</html>

@@ -12,7 +12,7 @@ class LinkedList {
         this._first = null;
         this._last = null;
         this._size = 0;
-        this._currentIndex = -1;
+        this._currentIndex = undefined;
         this._current = null; //nothing located yet.
 
 
@@ -76,19 +76,22 @@ class LinkedList {
         //default case. start from begining
         var current = this._first;
         var startIndex = 0;
-        var steps =index;
+        var steps = index;
 
         if (this._current && this._currentIndex < index) {
             startIndex = this._currentIndex;
             current = this._current;
-            steps= index-this._currentIndex;
+            steps = index - this._currentIndex;
 
         }
 
         console.log(`locating from start=${startIndex}\tsteps=${steps}`);
 
-        for (var i = startIndex; i < steps; i++)
+        for (var i = 0; i < steps; i++) {
+            
             current = current.next;
+        }
+
 
         this._current = current;
         this._currentIndex = index;
