@@ -19,11 +19,63 @@
         <li><a href="https://vivek.vnc.in/manas">Link#4</a></li>
     </ul>
 
-    <button>Copy Links</button>
-    <button>Replace Link Texts</button>
+    <button onclick="app.handleCopyLinks();">Copy Links</button>
+    <button onclick="app.handleReplaceLinks();">Replace Link Texts</button>
+    <button onclick="app.handleDecorateLinks();">Decorate Links</button>
 
     <fieldset>
         <legend>Link Addresses</legend>
+        <div id="links">
+
+        </div>
     </fieldset>
+
+    
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <script>
+        var app=(function(){
+
+
+            var links=$("#links");
+            
+          
+            //document on load function
+
+           
+
+            
+            return {
+                handleCopyLinks(){
+                    $("a").each(function(){
+                        var a = $(this);
+                        var href= a.attr("href");
+                        links.append(`<p>${href}</p>`);
+                    });
+                },
+                handleReplaceLinks(){
+                    $("a").each(function(){
+                        var a = $(this);
+                        var href= a.attr("href");
+                        a.html(href);
+                    });
+                },
+                handleDecorateLinks(){
+                    $("a:odd").each(function(){
+                        $(this).css("background-color","light-yellow");
+                    });
+                    $("a:even").each(function(){
+                        $(this).css({
+                            background:'light-green'
+                        });
+                    });
+                }
+            }
+
+        })();
+
+
+    </script>
 </body>
 </html>
