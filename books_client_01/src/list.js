@@ -1,7 +1,8 @@
-class Node{
-    constructor(value,next=null) {
+class Node {
+    constructor(value, next = null) {
         this.value = value;
         this.next = next;
+
     }
 }
 
@@ -11,7 +12,11 @@ class LinkedList {
         this._first = null;
         this._last = null;
         this._size = 0;
-        console.log('constructor', values);
+        this._currentIndex = -1;
+        this._current = null; //nothing located yet.
+
+
+        // console.log('constructor', values);
 
         for (var value of values) {
             this._append(value);
@@ -22,7 +27,7 @@ class LinkedList {
     }
 
     append(...values) {
-        console.log('append', values);
+        // console.log('append', values);
 
         for (var value of values) {
             this._append(value);
@@ -67,10 +72,26 @@ class LinkedList {
 
     _locate(index) {
         index = this._validateIndex(index);
+
+        //default case. start from begining
         var current = this._first;
-        for (var i = 0; i < index; i++)
+        var startIndex = 0;
+        var steps =index;
+
+        if (this._current && this._currentIndex < index) {
+            startIndex = this._currentIndex;
+            current = this._current;
+            steps= index-this._currentIndex;
+
+        }
+
+        console.log(`locating from start=${startIndex}\tsteps=${steps}`);
+
+        for (var i = startIndex; i < steps; i++)
             current = current.next;
 
+        this._current = current;
+        this._currentIndex = index;
         return current;
     }
 
@@ -87,21 +108,21 @@ class LinkedList {
     }
 
     insert(index, value) {
-        index= this._validateIndex(index);
-        
-        var newNode=new Node(value);
-        
-        
-        if(index===0){
-            newNode.next=this._first;
-            this._first=newNode;
-        }else{
+        index = this._validateIndex(index);
+
+        var newNode = new Node(value);
+
+
+        if (index === 0) {
+            newNode.next = this._first;
+            this._first = newNode;
+        } else {
             var n = this._locate(index - 1);
-            newNode.next=n.next;
-            n.next=newNode;
+            newNode.next = n.next;
+            n.next = newNode;
         }
         this._size++;
-        
+
     }
 
     remove(index) {
@@ -116,28 +137,31 @@ class LinkedList {
 
     }
 
-    toString(){
-        var str="LinkedList(\t";
-        for(var n=this._first; n ;  n = n.next){
-            str+=n.value+"\t";
+    toString() {
+        var str = "LinkedList(\t";
+        for (var n = this._first; n; n = n.next) {
+            str += n.value + "\t";
         }
 
-        return str+")";
+        return str + ")";
     }
 
-    forEach(execute){
-        var i=0;
-        for(var n=this._first; n ;  n = n.next){
-            execute(n.value,i);
+    forEach(execute) {
+        var i = 0;
+        for (var n = this._first; n; n = n.next) {
+            var result = execute(n.value, i);
+            if (result !== undefined)
+                return result;
             i++;
+
         }
     }
 
-    filter(matcher){
-        var result=new LinkedList();
+    filter(matcher) {
+        var result = new LinkedList();
 
-        this.forEach( v=>{
-            if(matcher(v)){
+        this.forEach(v => {
+            if (matcher(v)) {
                 result.append(v);
             }
         });
@@ -145,18 +169,18 @@ class LinkedList {
         return result;
     }
 
-    find(matcher){
-        for(var n=this._first;n!=null;n=n.next){
-            if(matcher(n.value)){
+    find(matcher) {
+        for (var n = this._first; n != null; n = n.next) {
+            if (matcher(n.value)) {
                 return n.value;
             }
         }
     }
 
-    map(mapper){
-        var result=new LinkedList();
+    map(mapper) {
+        var result = new LinkedList();
 
-        this.forEach( v=>{
+        this.forEach(v => {
             result.append(mapper(v));
         });
 
@@ -166,9 +190,9 @@ class LinkedList {
 
 }
 
-try{
-    module.exports.LinkedList=LinkedList;
-    module.exports.Node=Node;
-}catch(e){
+try {
+    module.exports.LinkedList = LinkedList;
+    module.exports.Node = Node;
+} catch (e) {
 
 }
