@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>JQuery Tutorial</h1>
+    <button id="toggleAllButton">Toggle All</button>
+    
+    <h2>Introduction</h2>
+    <p>Jquery is a javascript library for dom manipulation</p>
+
+    <h2 id="importantElementsHeader">Important Elements</h2>
+    <ul id="importantElementsContent">
+        <li>Selector</li>
+        <li>Actions</li>
+        <li>Utility</li>
+    </ul>
+
+    <h2>Selectors</h2>
+    <p>jQuery selectors helps us select multiple items mathcing the selection
+    <ul>
+        <li>Element Selector</li>
+        <li>Class Selector</li>
+        <li>ID Selector</li>
+        <li>Attribute Selector</li>
+        <li>Child Selector</li>
+        <li>Parent Selector</li>
+        <li>Sibling Selector</li>
+        <li>Group Selector</li>
+        <li>Universal Selector</li>
+        <li>Form Selector</li>
+        <li>CSS3 Pseudo-class Selector</li>
+        <li>jQuery Object Selector</li>
+    </ul>
+    </p>
+
+    <h2>Actions</h2>
+    <p>jQuery selectors helps us select multiple items mathcing the selection
+    <ul>
+        <li>hide()</li>
+        <li>show()</li>
+    </ul>
+
+    </p>
+
+    <h2 id="pluginsHeader">Plugins</h2>
+    <div id="pluginsContent">
+        <p>
+            jQuery allows you to add custom user defined functions into jquery This make jquery and extensible library
+        </p>
+        <p>
+            We can attach user defined function that can called as if they are part of jQuery.
+        </p>
+    </div>
+
+    <button id="toggleAllButton2">Toggle All</button>
+
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <script>
+
+        $(function () {
+
+            function toggleAll() {
+
+                $("p,ul").slideToggle('slow');
+
+            }
+
+
+
+            $("#toggleAllButton").click(toggleAll);
+            $("#toggleAllButton2").click(toggleAll);
+           
+            $("#importantElementsHeader").click(() => {
+                $("#importantElementsContent").slideToggle(700);
+            });
+
+            $("#importantElementsContent").click(() => {
+                $("#importantElementsContent").slideToggle(700);
+            });
+        });
+
+        var app = (function () {
+
+
+
+            return {
+
+            }
+
+
+        })()
+
+
+    </script>
+
+</body>
+
+</html>
