@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #src + p{
+            background-color: lightgreen;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="src">
+        <p>Zero</p>
+        <section>
+            <p>One</p>
+            <p>Two</p>
+            <p>Three</p>
+        </section>
+        <p>Four</p>
+        <p>Five</p>
+    </div>
+
+    <button onclick="app.getAllChildren()">div   p</button>
+    <button onclick="app.getFirstChild()">div + p</button>
+    <button onclick="app.getDirectChildren()">div > p</button>
+    <fieldset>
+        <legend>Result</legend>
+        <div id="result">
+    
+        </div>
+    </fieldset>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <script>
+        var app=(function(){
+            var result=$("#result");
+
+            function showResult(selection){
+                var str="";
+                selection.each(function(){
+                    str+=$(this).html()+"<br/>";
+                });
+                result.html(str);
+            }
+
+            return {
+                getAllChildren(){
+                    showResult($("#src p"));
+                },
+                getDirectChildren(){
+                    console.log('show direct chidren');
+                    showResult($("#src > p"));
+                },
+                getFirstChild(){
+                    console.log('show first child');
+                    showResult($("#src + p"));
+                }
+
+            };
+        })();
+    </script>
+</body>
+</html>

@@ -16,17 +16,18 @@
                 <ul>
                     
                     <li><button>List</button></li>
-                    <li><button>Add</button></li>
-                    <li><button>Remove</button></li>
+                    <li><button onclick="app.handleAddBook()">Add</button></li>
+                    <li><button onclick="app.handleDelete()" >Remove</button></li>
                 
                 </ul>
+                
             </div>
         </header>
         <div id="content">
 
             <div class="search-bar">
                 <span>Search By</span>
-                <select name="search_criteria" id="search_criteria">
+                <select  id="search_criteria">
                     <option value="id_search">Id</option>
                     <option value="author_serach">Author</option>
                     <option value="price_search">Price</option>
@@ -43,7 +44,8 @@
                 </div>
 
                 <div class="book-editor">
-                    <h2>Book Editor</h2>
+                    <h2 id="book-editor-title">Book Editor</h2>
+                    <input type="hidden" id="book-id"/>
                     <div class="input">
                         <label for="book-title">Title</label>
                         <input id="book-title"/>
@@ -65,7 +67,16 @@
                         <input id="book-cover"/>
                     </div>
 
+                    <div class="buttons">
+                        <button onclick="app.handleSave()" id="save-btn">Save</button>
+                        <button onclick="app.handleDelete()" id="remove-btn">Remove</button>
+                    </div>
+                    <div id="error-message"></div>
 
+                </div>
+
+                <div class="cover-image-div">
+                    <img id="book-cover-image" src="https://m.media-amazon.com/images/I/41xektjU1NL._SY445_SX342_.jpg"/>
                 </div>
 
             </div>
@@ -75,6 +86,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
+    <script src="jquery-extensions.js"></script>
     <script src="list.js"></script>
     <script src="book-manager.js"></script>
     <script src="app.js"></script>

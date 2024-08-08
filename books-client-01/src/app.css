@@ -40,9 +40,9 @@ header{
     font-weight: bold;
 }
 
-/* #nav > ul > li:last > button{
-    border:0px;
-} */
+#nav li:last-child button{
+    border-right:0px;
+}
 
 
 .search-bar{
@@ -65,6 +65,7 @@ header{
     
 }
 .book-list-div li{
+    cursor: pointer;
     list-style: none;
     padding-bottom:5px;
     font-size:18px;
@@ -72,8 +73,45 @@ header{
     
 }
 
+.book-list-div li:hover{
+    background-color:lightgreen;
+}
+
 .book-editor{
     border-left: 1px solid gray;
     margin-left:20px;
     padding-left:10px;
+}
+
+.input{
+    margin-bottom:5px;
+}
+input, input:enabled{
+    outline:none;
+    height:20px;
+    border:0px;
+    border-bottom:1px solid gray;
+}
+
+
+label{
+    display:block;
+}
+
+
+.buttons{
+    margin-top:20px;
+    display:flex;
+    justify-content: space-between;
+}
+
+.cover-image-div{
+    padding-left:50px;
+    display:flex;
+    align-items:center;
+}
+
+#book-cover-image{
+    height:250px;
+    box-shadow:-5px 5px 10px gray;
 }
