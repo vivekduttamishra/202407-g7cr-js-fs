@@ -10,6 +10,10 @@
         return old;
     }
 
+    $.fn.int=function(){
+        return parseInt($(this).val());
+    }
+
     $.fn.highlight=function(options){
         var settings=$.extend({
             background:'lightyellow',
@@ -20,3 +24,4 @@
     }
 
 })(jQuery);
+

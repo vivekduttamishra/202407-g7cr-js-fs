@@ -81,7 +81,7 @@ var app=(function(){
     }
 
     var handleDelete=function(){
-        var bookId=parseInt($("#book-id").val());
+        var bookId=$("#book-id").int();
         console.log('remove',bookId);
         
         bookManager.removeBook(bookId);
