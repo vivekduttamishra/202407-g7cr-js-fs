@@ -20,123 +20,54 @@ var app=(function(){
 
     var bookManager=new BookManager();
 
+    //name defined by Shiva.
+    function createSearchInputBoxes(bar){
+        switch(bar){
+            case 'author':
+                return hideMinMaxDiv('author');
+            case 'price':
+                return hideSearchBox('price');
 
-    var createSingleInput=()=>`<input type='text' id='q' placeholder='search...'/>`;
-    
-    function createRangeInputBuilder(label,min, max){
-        let _max='';
-        if(max){
-            _max=`max="${max}"`;
-        }
+            case 'rating':
+                return hideSearchBox('rating');
 
-        let _min='';
-        if(min!==undefined){
-            _min=`min="${min}"`;
-        }
-        
-        function generateUi(){
-            return `
-            <input type='number' id='min' placeholder='min ${label}' ${_min} ${_max} />
-            <input type='number' id='max' placeholder='max ${label}' ${_min} ${_max} />
-        `
-        }
+            case '_id':
+                return hideMinMaxDiv('id');
 
-        return generateUi;
+        }
     }
 
+    createSearchInputBoxes('_id');
 
-    var searchOptions={
-        _id: {
-            builder: createSingleInput,
-            handler: function(){
-                var id= $("#q").int();
-                return bookManager.getBookById(id);    
-            },
-            label:"Id"
+    function hideMinMaxDiv(term){
+        minMaxDiv.style.display="none";
+        searchInput.style.display="inline";
+        searchInput.setAttribute('placeholder',`Search ${term}`);
+    }
+    function hideSearchBox(term){
+        $("#min").attr('placeholder','Min '+term);
+        $("#max").attr('placeholder','Max '+term);
+        if(term=='rating'){
+            $("#min")
+                .attr('min',1)
+                .attr('max',5);
 
-        },
-        price:{
-            builder: createRangeInputBuilder("price",0),
-            handler: function(){
-                var min= $("#min").val();
-                var max= $("#max").val();
-                return bookManager.getBooksByPriceRange(min, max);
-            },
-            label:"Price Range"
+            $("#max")
+                .attr('min',1)
+                .attr('max',5);
         }
-       
-
-    }
-
-    function buildSearchUI(selectedType){
-        // step #1 add values in the combo box
-
-        // step #2 select the selectedType in combo box
-
-        // step #3 generate the ui for the selected type
-    }
-
-
-    var searchUiBuilder={
-        _id: createSingleInput,
-        author: createSingleInput,
-        price:createRangeInputBuilder("price",0),
-        rating: createRangeInputBuilder("rating",1,5),
-    }
-
-    var searchHandlers={
-        _id: function(){
-            var id= $("#q").int();
-            var book= bookManager.getBookById(id);
-            toEditor(book);
-        },
-        author:function(){
-            var author= $("#q").val();
-            return bookManager.getBooksByAuthor(author);
-        },
-        price:function(){
-            var min= $("#min").val();
-            var max= $("#max").val();
-            return bookManager.getBooksByPriceRange(min, max);
-        },
-        rating:function(){
-            var min=$("#min").val();
-            var max=$("#max").val();
-            return bookManager.getBooksByRatingRange(min,max);
-            
-        }
+        searchInput.style.display="none";
+        minMaxDiv.style.display="inline";
     }
 
 
     var handleSearchTypeSelection=function(event){
+        //searchCriteria=searchCriteriaDropDown.value;
+        //console.log('searchCriteria',searchCriteria);
         searchCriteria=event.target.value;
-        displaySearchUi(searchCriteria);
+        console.log('searchCriteria',searchCriteria);
+        createSearchInputBoxes(searchCriteria);
     }
-
-    function displaySearchUi(searchCriteria){
-        if(searchUiBuilder[searchCriteria]){
-            var ui= searchUiBuilder[searchCriteria];
-            var html= ui();
-            $("#search-parameters").html(html);
-        }
-    }
-
-
-
-    var handleSearch=function(){
-        let searchType = $("#search_criteria").val();
-        
-        var searchHandler= searchHandlers[searchType];
-
-        if(searchHandler){
-            var books=searchHandler();
-            if(books)
-                refreshBookList(books);
-        }
-        
-    }
-
-  
     
 
     function toEditor(book){
@@ -177,8 +108,6 @@ var app=(function(){
 
 
     var init=function(){
-        //createSearchInputBoxes('_id');
-        displaySearchUi('_id');
         var books=bookManager.getBooks();
         refreshBookList(books);
         handleAddBook();
@@ -217,7 +146,18 @@ var app=(function(){
 
 
 
-   
+    var handleSearch=function(){
+        let searchType = $("#search_criteria").val();
+        let searchValue = $("#search-input").val();
+        console.log("app.js", searchValue)
+        let min = $("#search_min").val();
+        let max = $("#search_max").val();
+
+        let filteredBooks = bookManager.search(searchType,searchValue , min, max);
+        console.log("filteredBooks", filteredBooks);
+
+        refreshBookList(bookManager.getBooks());
+    }
 
     
 
