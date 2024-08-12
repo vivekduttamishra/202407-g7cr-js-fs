@@ -61,38 +61,66 @@ class DblList extends LinkedList{
         
         var index= this._validateIndex(index);
 
-        var navigator= (pos,anchor)=>{
-            return {
-                steps:  Math.abs(index-pos), 
-                direction: (index-pos)>=0? 1: -1,
-                anchor:anchor,
-                next: (n)=> {
-                    if(direction){
-                        n=n.next;                        
-                    }else if(direction<0){
-                        n=n.previous;
+        var list=this; //remember which list we are talking about
+
+        var Navigator=function (startingPosition,startingNode){
+            
+                var steps=  Math.abs(index-startingPosition);                
+                var node=startingNode;
+
+                this.getSteps=()=> steps;
+
+                this.getBestNavigator=(otherNavigator)=>{
+                    if(steps<=otherNavigator.getSteps()){
+                        return this;
                     }
-                    return n;
+                    else{
+                        return otherNavigator;
+                    }
                 }
 
-            }
-        }
+                this.navigate= function(){
 
-        var startNavigator= navigator(0,this._first);
-        var currentNavigator= navigator(this._currentIndex===null?0:this._currentIndex, this._current); //if this._current===null, this navigator will not be used
-        var endNavivator= navigator(this._size-1, this._last);
+                    console.log(`Navigating from ${startingPosition} ${index-startingPosition}`);
+                    
 
-        var selectedNavigator=null;
-        if(startNavigator.steps<= currentNavigator.steps && startNavigator.steps<= endNavigator.steps){
-            selectedNavigator=startNavigator;
-        } else if(currentNavigator.steps<= endNavigator.steps && currentNavigator.steps<= endNavigator.steps){
-            selectedNavigator=currentNavigator;
-        }else{
-            selectedNavigator=endNavivator;
-        }
+                    if(steps===0)
+                        return node;
+
+                    var forwardDirection= index-startingPosition>0;
+
+                    for(var i=0;i<steps;i++){
+                        if(forwardDirection)
+                            node=node.next;
+                        else
+                            node=node.previous;
+                    }
+                    
+                    console.log(`current updated to ${index}`);
+
+                    list._current=node;//this._current=node;
+                    list._currentIndex=index;//this._currentIndex=index;
+                    return node;
+                }
+        };
+
+        var startNavigator=new Navigator(0,this._first);
+        var currentNavigator=new  Navigator(this._currentIndex===null?0:this._currentIndex, this._current); //if this._current===null, this navigator will not be used
+        var endNavigator=new  Navigator(this._size-1, this._last);
+        
+        // var selectedNavigator = startNavigator.getBestNavigator(currentNavigator);
+        // selectedNavigator= selectedNavigator.getBestNavigator(endNavigator);
+        // var node= selectedNavigator.navigate();
+        
+        //Simplified chained code.
+        return  startNavigator
+                            .getBestNavigator(currentNavigator)
+                            .getBestNavigator(endNavigator)
+                            .navigate();
+
        
 
-
+        
         
 
 
@@ -101,5 +129,14 @@ class DblList extends LinkedList{
     }
 
 
+
+}
+
+try{
+    module.exports={
+        DblList:DblList,
+        
+    }
+}catch(e){
 
 }

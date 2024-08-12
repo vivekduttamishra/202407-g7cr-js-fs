@@ -29,6 +29,8 @@ class LinkedList {
         for (var value of values) {
             this._append(value);
         }
+
+        return this;
     }
 
     isEmpty() {
@@ -82,7 +84,7 @@ class LinkedList {
 
         }
 
-        console.log(`locating from start=${startIndex}\tsteps=${steps}`);
+        //console.log(`locating from start=${startIndex}\tsteps=${steps}`);
 
         for (var i = 0; i < steps; i++) {
             
@@ -105,6 +107,7 @@ class LinkedList {
 
     set(index, value) {
         this._locate(index).value = value;
+        return this;
     }
 
     insert(index, value) {
@@ -122,18 +125,27 @@ class LinkedList {
             n.next = newNode;
         }
         this._size++;
+        return this;
 
     }
 
     remove(index) {
+
+        if(index===0 && this._size>0){
+            var d= this._first.value;
+            this.first=this._first.next;
+            this._size--;
+            return d;
+        }
+
+        //for all other nodes
         this._validateIndex(index);
         var p = this._locate(index - 1);
-        console.log('p', p);
-
-        //now remove p.next
+       
+        var delValue=p.next.value;
         p.next = p.next.next;
-
-        return p.value;
+        this._size--;
+        return delValue;
 
     }
 
