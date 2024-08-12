@@ -21,9 +21,6 @@ class LinkedList {
         for (var value of values) {
             this._append(value);
         }
-
-
-
     }
 
     append(...values) {
