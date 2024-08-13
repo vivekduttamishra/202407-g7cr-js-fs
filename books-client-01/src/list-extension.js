@@ -11,10 +11,13 @@ var {LinkedList} = require('./list');
             var p=null;
             for(var i=0; i<this.size();i++){
                 var v=this.get(i);
+                console.log(i,v);
+                
                 var _matched= matcher(v);
                 if(_matched===undefined)
                     break;
                 if(_matched){
+                    console.log('removing ',v);
                     removed.append(v);
                     this._removeIndex(i);
                     i--;

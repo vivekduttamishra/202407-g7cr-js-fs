@@ -1,4 +1,5 @@
-
+var {LinkedList} = require('./list');
+require('./list-extension');
 
 class Book {
     constructor(title, author, price, rating, cover) {

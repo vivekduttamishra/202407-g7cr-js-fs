@@ -172,8 +172,11 @@ class LinkedList {
     filter(matcher) {
         var result = new LinkedList();
 
-        this.forEach(v => {
-            if (matcher(v)) {
+      this.forEach(v => {
+            var _matched=matcher(v);
+            if(_matched===undefined)
+                return "exit filter" ; //any value breaks.
+            if (_matched) {
                 result.append(v);
             }
         });
