@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="app.css">
+</head>
+
+<body onload="app.init()">
+    <div id="body"> 
+        <header>
+            <h1>Book's Web</h1>
+            <div id="nav">
+                <ul>
+                    
+                    <li><button class="btn">List</button></li>
+                    <li><button class="btn" onclick="app.handleAddBook()">Add</button></li>
+                    <li><button class='btn' onclick="app.handleDelete()" >Remove</button></li>
+                
+                </ul>
+                
+            </div>
+        </header>
+        <div id="content">
+
+            <div class="search-bar">
+                <span >Search By</span>
+                <select  id="search_criteria" onchange="app.handleSearchTypeSelection(event)">
+                    <option value="_id">Id</option>
+                    <option value="author">Author</option>
+                    <option value="price">Price Range</option>
+                    <option value="rating">Rating Range</option>
+                </select>
+                <div id="search-parameters">
+                    
+                </div>
+                <button id="search-button" onclick="app.handleSearch()">Search</button>
+            </div>
+            <div class="main-body">
+
+                <div class="book-list-div">
+                    <ul id="book-list">
+                    </ul>
+                </div>
+
+                <div class="book-editor">
+                    <h2 id="book-editor-title">Book Editor</h2>
+                    <input type="hidden" id="book-id"/>
+                    <div class="input">
+                        <label for="book-title">Title</label>
+                        <input id="book-title"/>
+                    </div>
+                    <div class="input">
+                        <label for="book-author">Author</label>
+                        <input id="book-author"/>
+                    </div>
+                    <div class="input">
+                        <label for="book-price">Price</label>
+                        <input id="book-price"/>
+                    </div>
+                    <div class="input">
+                        <label for="book-rating">Rating</label>
+                        <input id="book-rating"/>
+                    </div>
+                    <div class="input">
+                        <label for="book-cover">Cover</label>
+                        <input id="book-cover"/>
+                    </div>
+
+                    <div class="buttons">
+                        <button class="btn btn-primary" onclick="app.handleSave()" id="save-btn">Save</button>
+                        <button class='btn btn-danger' onclick="app.handleDelete()" id="remove-btn">Remove</button>
+                    </div>
+                    <div id="error-message"></div>
+
+                </div>
+
+                <div class="cover-image-div">
+                    <img id="book-cover-image" src="https://m.media-amazon.com/images/I/41xektjU1NL._SY445_SX342_.jpg"/>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <script src="../node_modules/jquery/dist/jquery.min.js"
+    <script src="jquery-extensions.js"></script>
+    <script src="list.js"></script>
+    <script src="list-extension.js"></script>
+    <script src="book-manager.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

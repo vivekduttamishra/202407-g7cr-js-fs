@@ -3,13 +3,24 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo Test Runner is not yet configured",
+    "clear": "del node_modules /Q /F /S",
+    "build": "npm install",
+    "start": "node src/list-test.js",
+    "dev": "nodemon src/list-test.js",
+    "where:nodemon": "where nodemon",
+    "where:tsc":"where tsc"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "bootstrap": "^5.3.3",
     "jquery": "^3.7.1"
+  },
+  "devDependencies": {
+    "mocha": "^10.7.3",
+    "nodemon": "^3.1.4"
   }
 }

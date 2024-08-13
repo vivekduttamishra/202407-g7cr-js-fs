@@ -18,7 +18,9 @@ class LinkedList {
 
         // console.log('constructor', values);
 
-        this.append(...values);
+        for (var value of values) {
+            this._append(value);
+        }
     }
 
     append(...values) {
@@ -56,7 +58,7 @@ class LinkedList {
     _validateIndex(index) {
 
         if (typeof index !== 'number')
-            throw new TypeError(`Index must be a number: "${index}"`);
+            throw new TypeError('Index must be a number');
 
         if (index < 0)
             index += this._size;
