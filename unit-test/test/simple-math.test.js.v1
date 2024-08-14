@@ -1,0 +1,33 @@
+var {plus,minus,multiply,divide}=require('../src/simple-math');
+var {test} = require('node:test');
+var {assertEquals}=require('../src/asserts');
+
+
+
+var x=10;
+var y=5;
+
+test('plus should add two numbers',function(){
+    var result = plus(x,y);
+    console.log(`plus(${x},${y})`,result);
+    if(result!==x+y)
+        throw new Error();
+
+});
+test('minus should substract two numbers',()=>{
+    var result = minus(x,y);
+    console.log(`minus(${x},${y})`,result);
+   if(result!==x-y)
+        throw new Error();
+});
+test('multiply should multiply two numbers',()=>{
+    var result = multiply(x,y);
+    console.log(`multiply(${x},${y})`,result);
+    if(result!==x*y)
+        throw new Error(`Multiply failed. expected ${x*y} got ${result}`);
+});
+test('divide should divide first number with second',()=>{
+    var result = divide(x,y);
+    console.log(`divide(${x},${y})`,result);
+    assert(x/y, result);
+});
