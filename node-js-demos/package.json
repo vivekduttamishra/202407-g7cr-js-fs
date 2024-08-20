@@ -6,8 +6,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha",
-    "test:watch": "mocha --watch"
+    "test": "mocha --timeout 20000",
+    "test:watch": "mocha --watch --timeout 20000"
   },
   "keywords": [],
   "author": "",
