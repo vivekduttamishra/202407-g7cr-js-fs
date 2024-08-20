@@ -1,4 +1,5 @@
 var { should, expect } = require('chai');
+var {donnable}=require('../src/test-utils')
 
 should();
 
@@ -62,15 +63,25 @@ describe('findPrimes with callback', () => {
         // the below code can't work as findPrimes doesn't return anything.
         //findPrimes(2,10,()=>{}).should.deep.equals([2,3,5,7]);
         var callbackCalled = false;
-        findPrimes(2, 10, (error, primes) => {
+        // findPrimes(2, 10, (error, primes) => {
            
+        //     callbackCalled = true;
+
+        //     expect(error).to.be.null;
+
+        //     primes.should.deep.equal([2, 3, 5, 7]);
+        //     done();
+        // });
+
+
+
+        findPrimes(2,10, donnable(done, (errors,primes)=>{
             callbackCalled = true;
-
-            expect(error).to.be.null;
-
+            expect(errors).to.be.null;
             primes.should.deep.equal([2, 3, 5, 7]);
-            done();
-        });
+        }));
+
+
 
         //we haven't entered the callback yet
         //we will enter later.
@@ -81,34 +92,63 @@ describe('findPrimes with callback', () => {
     });
 
     it('should return error for invalid range', (done) => {
-        findPrimes(10, 2, (error, primes) => {
+        findPrimes(10, 2, donnable(done,(error, primes) => {
             expect(error.message).to.contain('Invalid Range');
             expect(primes).to.be.undefined;
-            done();
-        });
+            
+        }));
     });
 
-    it('should return primes within valid range', (done) => {
-        findPrimes(2, 100, (_, primes) => {
-            primes.forEach(prime => isPrimeSync(prime).should.be.true);
-            done();
-        });
+    it('should return primes within valid range', async() => {
+        var primes = await findPrimes(2, 100);
+
+        primes.should.all.satisfy(p=>isPrimeSync(p))
+
     });
 
-    it('should finish the shorter job first',()=>{
-        let start=performance.now();
-        let end1=0,end2=0;
+    it('should finish the shorter job first',(done)=>{
+        
+        let longJobFinished=false;
+        let shortJobFinished=false;
+
         findPrimes(0,20000,(_,primes)=>{
-            end1=performance.now();
+            longJobFinished=true;
         });
 
-        findPrimes(0,200, (_, primes) =>{
-            end2=performance.now();
-        });
+        findPrimes(0,5000,donnable(done, (_, primes) =>{
+            shortJobFinished=true;
+            longJobFinished.should.be.false;
+  
+        }));
 
-        expect(end2).to.be.lessThan(end1);
+        //expect(shortJobTimeTaken).to.be.lessThan(longJobTimeTaken);
 
     });
+
+    it('should allow execution of next async function even with await blocking current one',(done)=>{
+
+        async function findPrimesAndNotify(min,max,cb){
+            var primes= await findPrimes(min,max);
+            //we come here when findPrimes finishes
+            cb(primes);
+
+            //but this function will return immediately with a promise.
+        };
+
+        var shorterTaskFinished=false,longJobFinished=false;
+
+        findPrimesAndNotify(0,2000,_=>{
+            longJobFinished=true;
+        });
+
+        findPrimesAndNotify(0,500,donnable(done,(()=>{
+            shorterTaskFinished=true;
+            longJobFinished.should.be.false;
+        })));
+
+
+    });
+
 
 }).timeout(20000);
 
@@ -129,18 +169,25 @@ describe('findPrimesPromise', function() {
     });
 
     it('should return error for invalid range', (done) => {
-        findPrimesPromise(10, 2)
-            .then(primes => expect.fail('should not enter then'))
-            .catch((error) => {
-                    try{
+        // findPrimesPromise(10, 2)
+        //     .then(primes => expect.fail('should not enter then'))
+        //     .catch((error) => {
+        //             try{
 
-                        expect(error.message).to.contain('Invalid Value');
-                        done(); //success. no error
-                    }catch(e){
-                        done(e);
-                    }
+        //                 expect(error.message).to.contain('Invalid Range');
+        //                 done(); //success. no error
+        //             }catch(e){
+        //                 done(e);
+        //             }
                 
-            });
+        //     });
+
+
+        findPrimesPromise(10,2)
+            .catch( donnable(done, error=>{
+                expect(error.message).to.contain('Invalid Range');
+            }));
+
     });
 
     it('should return primes within valid range', () => {
@@ -148,7 +195,7 @@ describe('findPrimesPromise', function() {
             //completes after the promise is resolved. That is in future
             .then(primes => {
                 //this assertion WILL execute when the promise is resolved.
-                primes.forEach(prime => isPrimeSync(prime).should.be.false);
+                primes.forEach(prime => isPrimeSync(prime).should.be.true);
             });
 
 
@@ -166,6 +213,28 @@ describe('findPrimesPromise', function() {
         var p2=findPrimesPromise(2,200);
 
         expect(task2Start-task1Start).to.be.lessThan(1);
+
+    });
+
+    it('should finish the shorter job first',(done)=>{
+        var start=performance.now();
+        
+        let largeTaskTime;
+        let smallTaskTime;
+
+        var promise1= findPrimes(2,10000).then(_=> largeTaskTime=performance.now()-start);
+        var promise2= findPrimes(2,200).then(_=> {
+            smallTaskTime=performance.now()-start
+            expect(largeTaskTime).to.be.undefined; //largerTask hasn't finished yet.
+        });
+
+        //wait for both promises to finish.
+        Promise
+            .all([promise1,promise2]) //wait for all promises to complete
+            .then(donnable(done,_=>{
+                smallTaskTime.should.be.lessThan(largeTaskTime);
+            }));
+
 
     });
 

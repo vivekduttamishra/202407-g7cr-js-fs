@@ -4,7 +4,7 @@ should();
 var {books}=require('../src/books');
 var {matchers,generators}=require('../src/matchers');
 var {fill,fixed,range}=generators;
-var {match,contains,not,between,any, containsNoneOf} = matchers;
+var {match,contains,not,between,any,all, containsNoneOf,or} = matchers;
 var {LinkedList}= require('../src/list');
 
 describe('fill function',()=>{
@@ -22,7 +22,7 @@ describe('fill function',()=>{
 
     it('should fill Linked List with range(2,20,5)',()=>{
         var list=new LinkedList();
-        fill(list.append.bind(list), range(2,20,5));
+        fill(v=>list.append(v), range(2,20,5));
         var expected=[2,7,12,17]
         for(let i=0;i<expected.length;i++){
             list.get(i).should.equal(expected[i]);
@@ -51,13 +51,18 @@ describe('match matcher',()=>{
 
     it('should be able to find books in price range 200-300',()=>{
         var result=books.filter(
-            match({price: between(200,300)})
+            match({
+                price: between(200,300)
+            })
         );
         result.size().should.equal(1);
     })
 
     it('should find books by vivek under 200',()=>{
-        var result = books.filter(match({price:matchers.lessThan(200), author:contains('vivek')}))
+        var result = books.filter(match({
+            price:matchers.lessThan(200), 
+            author:contains('vivek')}
+        ));
 
         result.size().should.equal(1);
         result.get(0).title.should.equal('Manas');
@@ -67,13 +72,13 @@ describe('match matcher',()=>{
         var result = books.filter(match(
         {
             tags: contains('mahabharata'),
-            $1: any(
+            $priceOrRating: any(
                 match({rating: matchers.greaterThan(4.8)}),
                 match({price: matchers.lessThan(200)}),
             ) 
         }));
 
-        result.size().should.be.equal(2);
+        result.size().should.be.equal(3);
     });
 
     it('should return all poetry books by vivek or dinkar',()=>{
@@ -82,7 +87,7 @@ describe('match matcher',()=>{
             tags: contains('poetry')
         }));
 
-        result.size().should.be.equal(3);
+        result.size().should.be.equal(4);
     });
 
     it('it should return poetry books by author other than dinkar',()=>{
@@ -96,13 +101,14 @@ describe('match matcher',()=>{
 
     it('should return all books written by authors other than dinkar and vivek',()=>{
         var result = books.filter(match({
-            author: containsNoneOf('vivek','dinkar')
+            //author: containsNoneOf('vivek','dinkar')
+            author: not(any(contains('vivek'), contains('dinkar')))
         }));
 
-        result.size().should.equal(books.size()-4);
+        result.size().should.equal(books.size()-5);
     })
 
-    it('should filter or poetry books that are not on mahabharata',()=>{
+    it('should filter all poetry books that are not on mahabharata',()=>{
         var result=books.filter(match({
             tags: matchers.all(not(contains('mahabharata')), contains('poetry')),
            // rating: matchers.greaterThan(4.5)

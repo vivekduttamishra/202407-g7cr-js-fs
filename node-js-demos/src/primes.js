@@ -21,84 +21,47 @@ function findPrimesSync(min, max) {
 
     return primes;
 }
-function _findPrimesPromiseV1(min, max) {
 
-    return new Promise((resolve, reject) => {
-        if (max <= min) {
-            reject(new Error(`Invalid Range (${min}-${max})`)); //error
+function findPrimes(min,max,cb){
+    return new Promise((resolve,reject)=>{
+
+        var primes=[];
+        var low=min;
+        var high= Math.min(max,min+1000);
+        if(cb===undefined) 
+            cb=()=>{}; //define a dummy callback
+
+
+
+        if(min>=max){
+            reject(new Error(`Invalid Range (${min}-${max})`));
+            
+            cb(new Error(`Invalid Range (${min}-${max})`));
             return;
         }
 
-        var primes = [];
-        for (let i = min; i < max; i++) {
-            if (isPrimeSync(i))
-                primes.push(i);
-        }
+        const iid= setInterval(()=>{
 
-        resolve(primes); //success
-    });
 
-}
-function findPrimesPromise(min, max) {
-
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            if (max <= min) {
-                reject(new Error(`Invalid Range (${min}-${max})`)); //error
-                return;
-            }
-
-            var primes = [];
-            for (let i = min; i < max; i++) {
-                if (isPrimeSync(i))
+            for(let i=low;i<high;i++){
+                if(isPrimeSync(i))
                     primes.push(i);
             }
 
-            resolve(primes); //success
-        }, 1000);
+            low=high;
+            high=Math.min(max,low+1000);
+            if(low>=high){
+                //all done
+                resolve(primes);
+                cb(null,primes);
+                clearInterval(iid); //stop the interval
+                return;
+            }
+
+
+        },1);
+
     });
-
-}
-
-
-function _findPrimesV1(min, max, cb) {
-
-    if (max <= min) {
-        cb(new Error(`Invalid Range (${min}-${max})`)); //error
-        return;
-    }
-
-
-    var primes = [];
-    for (let i = min; i < max; i++) {
-        if (isPrimeSync(i))
-            primes.push(i);
-    }
-
-    //return primes;
-    cb(null, primes); //success
-}
-function findPrimes(min, max, cb) {
-
-    setTimeout(() => {
-
-        if (max <= min) {
-            cb(new Error(`Invalid Range (${min}-${max})`)); //error
-            return;
-        }
-
-
-        var primes = [];
-        for (let i = min; i < max; i++) {
-            if (isPrimeSync(i))
-                primes.push(i);
-        }
-
-        //return primes;
-        cb(null, primes); //success
-    }, 1000);
-
-
 }
 
 
@@ -106,5 +69,5 @@ module.exports = {
     isPrimeSync,
     findPrimesSync,
     findPrimes,
-    findPrimesPromise
+    findPrimesPromise:findPrimes //alias name for findPrimes
 };
