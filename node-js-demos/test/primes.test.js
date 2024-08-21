@@ -3,7 +3,9 @@ var {donnable}=require('../src/test-utils')
 
 should();
 
-var { isPrimeSync, findPrimesSync, findPrimes, findPrimesPromise } = require('../src/primes');
+var { isPrimeSync,primeRange, findPrimesSync, findPrimes, findPrimesPromise } = require('../src/primes');
+var {LinkedList} = require('../src/list');
+
 
 describe('isPrimeSync', function () {
 
@@ -47,11 +49,6 @@ describe('findPrimesSync', function () {
     })
 
 });
-
-
-
-
-
 
 
 describe('findPrimes with callback', () => {
@@ -235,6 +232,54 @@ describe('findPrimesPromise', function() {
                 smallTaskTime.should.be.lessThan(largeTaskTime);
             }));
 
+
+    });
+
+});
+
+describe('primeRange', function(){
+
+    let range;
+    const expectedValues=[2,3,5,7];
+
+    beforeEach(()=>{
+        range=primeRange(0,10);
+    });
+
+    it('should match the expected values',()=>{
+        //range.length.should.equal(expectedValues.length);
+        for(var i=0; i<expectedValues.length; i++){
+            range.next().value.should.equal(expectedValues[i]);
+        }
+    });  
+    
+    it('should be convertable to a regular list using spread',()=>{
+        let range=primeRange(0,10);
+        var results=[...range];
+        results.should.deep.equal(expectedValues);
+
+    });
+
+    it('should be convertable to a LinkedList using spread', ()=>{
+        var list=new LinkedList(...range);
+
+        list.size().should.equal(expectedValues.length);
+    })
+
+    it('should abort on receiving abort message',()=>{
+
+        //Arrange
+        range.next(); //{value:2, done:false}
+        range.next(); //{value:3, done:false}
+
+        //Act
+        var result= range.next('abort'); //{value:{message: 'aborted',lastValueChecked: 3},done:false}
+        
+        //Assert
+        result.should.be.an('object').and.have.property('done', false);
+        result.value.should
+                        .have.property('message','aborted');
+        result.value.should.have.property('lastValueChecked',3);
 
     });
 

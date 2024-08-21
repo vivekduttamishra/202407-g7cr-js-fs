@@ -36,6 +36,31 @@ var {LinkedList} = require('./list');
                 return this._removeIndex(param);
         }
 
+        LinkedList.prototype.filteredList = LinkedList.prototype.filter;
+
+        LinkedList.prototype.filter = function*(matcher){
+            var index=0;
+            for(var node=this._first; node; node=node.next){
+                var matched=matcher(node.value,index++);
+                if(matched===undefined)
+                    return; //generator completes.
+                if(matched)
+                    yield node.value;
+            }
+        }
+
+        LinkedList.prototype.mappedList = LinkedList.prototype.map;
+        LinkedList.prototype.map= function*(selector){
+            var index=0;
+            for(var node=this._first; node; node=node.next)
+                yield selector(node.value,index++);
+        }
+
+        LinkedList.prototype.each= function*(){
+            for(var node=this._first;node;node=node.next)
+                yield node.value;
+        }
+
     }
 )();
 
