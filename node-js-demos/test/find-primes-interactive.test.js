@@ -87,6 +87,21 @@ describe('findPrimesInteractive',function(){
 
     });
 
+    it('sends one prime value at a time', done=>{
+        
+        var primes=[];
+        findPrimesInteractive(0,100, response=>{ 
+            if(response.message==="prime"){
+                primes.push(response.prime);
+            }
+
+            if(response.message==="done"){
+                primes.length.should.be(25);
+            }
+
+        });
+    });
+
     it('should abort the process and return message:"abort" on received abort request from the client', done=>{
 
         let aborted=false;

@@ -97,16 +97,11 @@ const primeRange = function *(min,max){
 var tasks=0;
 function findPrimesInteractive(min,max, cb){
 
-    if(cb===undefined)
-        throw new Error("callback not specified");
-
     var low=min;
     var high=Math.min(max,min+1000);
     var id=++tasks;
     var index=0;
-    var primes=[];
-    
-
+   
     const iid= setInterval(()=>{
         if(max<=min){
             cb({ message:"error", id, min, max, error:"Invalid Range"});
@@ -118,7 +113,6 @@ function findPrimesInteractive(min,max, cb){
             if(isPrimeSync(i)){
                 index++;
                 cb({ message:"prime", id, min, max, index, prime:i});
-                primes.push(i);
             }
         }
         cb({message:"progress",id,min,max,done:(high-min), primes:index})
@@ -136,6 +130,7 @@ function findPrimesInteractive(min,max, cb){
 
     return id;
 }
+
 
 
 
