@@ -116,8 +116,7 @@ describe('fs tests', function () {
                 .should.be
                 .rejected
                 .then(error=>{
-                    error.code.should.equal('ENOENT');
-                    
+                    error.code.should.equal('ENOENT');                    
                 }).should.eventually.notify(done);
                 
         })
