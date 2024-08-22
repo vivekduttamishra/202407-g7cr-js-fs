@@ -5,7 +5,7 @@ should(); //call should to enable should design.
 
 
 
-var {take,distinct}= require('../src/matchers');
+var {take,distinct}= require('../src/matchers').matchers;
 
 
 describe('Matchers', ()=>{

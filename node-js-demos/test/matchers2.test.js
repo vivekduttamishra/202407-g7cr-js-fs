@@ -4,7 +4,7 @@ should();
 var {books}=require('../src/books');
 var {matchers,generators}=require('../src/matchers');
 var {fill,fixed,range}=generators;
-var {match,contains,not,between,any,all, containsNoneOf,or} = matchers;
+var {match,contains,not,between,any,all, containsNoneOf,or,distinct} = matchers;
 var {LinkedList}= require('../src/list');
 
 describe('fill function',()=>{
@@ -130,4 +130,25 @@ describe('match matcher',()=>{
         result.size().should.equal(3);
 
     });
+});
+
+
+describe('distinct with filter',()=>{
+
+    it('should return true for a unqiue item',()=>{
+        var result =books.filteredList( b=>true);
+
+        var cached=[];
+
+        result.forEach(b=>{
+            if(cached.includes(b.author)){
+                expect.fail('Duplicate Author Found: '+b.author)
+            }
+            cached.push(b.author);
+        })
+
+        
+
+    });
+
 });
