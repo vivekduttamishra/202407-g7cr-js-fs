@@ -1,4 +1,5 @@
 
+const { info } = require('console');
 var stream = require('stream');
 
 
@@ -77,10 +78,44 @@ class Collector extends stream.Writable{
     }
 }
 
+function filter(filter,converter){
+    return new Middleware(
+        v=>{
+            if(converter)
+                v=converter(v);
+            if(filter(v))
+                return v;
+            else
+                return undefined;
+        }
+    );
+}
+
+function map(mapper,opt={}){
+   
+    var defaultFormatters={
+        inFormatter: v=>v.toString(),
+        outFormmater: v=>v.toString()
+    }
+
+    var opt={
+        ...defaultFormatters,
+        ...opt        
+    };
+
+    
+    return new Middleware(
+        v=>opt.outFormmater(mapper(opt.inFormatter(v)))
+    );
+}
+
+
 
 module.exports = {
     DelayedStream,
     Middleware,
     p: (tranformer)=> new Middleware(tranformer),
-    Collector
+    Collector,
+    filter,
+    map
 };
