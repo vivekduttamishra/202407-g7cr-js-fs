@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --require ts-node/register src/**/*.test.ts --watch",
+    "test": "ts-mocha test/*.ts --watch-files ./**/*.ts --watch",
+    "test:tsnode": "mocha --watch --require ts-node/register 'test/**/*.ts'",
+    "test:js":"mocha ./dist/test/*.test.js --watch",
     "dev": "tsc --watch",
     "build": "tsc"
   },
@@ -14,8 +16,10 @@
   "devDependencies": {
     "@types/chai": "^4.3.17",
     "@types/mocha": "^10.0.7",
-    "chai": "^5.1.1",
+    "chai": "^4.5.0",
     "mocha": "^10.7.3",
+    "ts-mocha": "^10.0.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
   }
 }
