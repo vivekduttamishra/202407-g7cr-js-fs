@@ -53,7 +53,7 @@ namespace Demo04{
         },
 
         {
-            name:{firstName:'Ramdhari', middleName:'Singh'},
+            name:{firstName:'Ramdhari', lastName:'Singh'},
             biography:'Author of Rashmirathi',
             photo:'ramdhari.jpg',
             tags:['Poetry', 'History']

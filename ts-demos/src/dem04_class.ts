@@ -1,7 +1,7 @@
 
 
 namespace Demo04{
-
+ 
     class Point{
         constructor(private x:number,private y:number){}
 
@@ -19,8 +19,8 @@ namespace Demo04{
 
 
 
-    var p2:Point = {x:20, y:30};
-    console.log('p2',p2);
+    // var p2:Point = {x:20, y:30};
+    // console.log('p2',p2);
     
 
 }

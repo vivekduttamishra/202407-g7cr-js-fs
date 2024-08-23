@@ -26,7 +26,7 @@ namespace PeopleManagement{
     
 
 
-    p1.name="New Name";
+    //p1.name="New Name";
     console.log(p1);
     console.log(p2);
 }

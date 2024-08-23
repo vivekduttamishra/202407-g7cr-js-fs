@@ -19,6 +19,6 @@ namespace collections{
 
     //to create an object
     var node = new Node<number>(20);
-    node.value=50; //OK
-    node.value='Hello'; //ERROR
+    //node.value=50; //OK
+    //node.value='Hello'; //ERROR
 }
