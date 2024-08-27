@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --watch",
-    "books-cli":"nodemon src/books-cli author-info"
+    "books-cli":"nodemon src/books-cli q"
   },
   "keywords": [],
   "author": "",

@@ -1,11 +1,13 @@
 var {disconnect} = require('./connection');
-var {getAuthorSummary} = require('./books');
+var {getAuthorSummary,getAuthorDetails,getBookAuthorDetails,query} = require('./books');
 var CLI = require('./cli');
 
 
 
 var app = new CLI("Books CLI",{close:disconnect});
 
-app.addCommand(getAuthorSummary, "author-info", "Gets infomration about authors","authors");
-
+app.addCommand(getAuthorDetails, "author-info", "Gets infomration about authors","authors");
+app.addCommand(getBookAuthorDetails, "book-details");
+app.addCommand(query, "q");
 app.run();
+ 
