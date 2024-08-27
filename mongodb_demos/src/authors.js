@@ -1,6 +1,7 @@
-var {connect,disconnect} =require('./connection');
+var {executor,connect} =require('./connection');
 
 var url='mongodb://localhost/';
+var authorsExecutor=executor(url, "g7cr_202408","authors");
 
 async function getAllAuthors(){
     var connection= await connect(url);
@@ -13,6 +14,14 @@ async function getAllAuthors(){
 
     return authors;
 
+}
+
+//{id:'vivek-dutta-mishra', name:'Vivek Dutta Mishra', biography:''}
+
+async function addAuthor(author){
+   return await authorsExecutor(async authors=>{
+    return await authors.insertOne(author);
+   });
 }
 
 async function getAuthorById(id){
@@ -28,5 +37,6 @@ async function getAuthorById(id){
 
 module.exports={
     getAllAuthors,
-    getAuthorById
+    getAuthorById,
+    addAuthor
 }
