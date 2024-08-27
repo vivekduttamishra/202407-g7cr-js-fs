@@ -1,0 +1,17 @@
+Group A
+* Thejaswini
+* Prasanna
+* Lalit
+* Vamsi
+
+
+Group B
+* John
+* Surendra
+* Jhanvi
+* Prasad
+
+Group C
+* Nagasridha
+* Kiran
+* Shiva

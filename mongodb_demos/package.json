@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --watch"
+    "test": "mocha --watch",
+    "books-cli":"nodemon src/books-cli author-info"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
-  "dependencies": {
+  "dependencies": { 
     "mongodb": "^6.8.0",
     "prompt-sync": "^4.2.0"
   },
