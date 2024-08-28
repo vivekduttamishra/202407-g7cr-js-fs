@@ -64,6 +64,37 @@ function findPrimes(min,max,cb){
     });
 }
 
+//var delay = time=>new Promise(resolve=>setTimeout(resolve,time));
+
+function delay(time){
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>resolve(), time);
+    });
+}
+
+
+async function  findPrimes(min,max,callback){
+    if(max<=min){
+        var error = new Error(`Invalid Range: ${min}-${max}`);
+        callback && callback(error);
+        throw error; //reject promise
+    }
+
+    var primes=[];
+    for(var i=min;i<max;i++){
+        if(isPrimeSync(i))
+            primes.push(i);
+        if(i%1000===0)
+            await delay(1);
+    }
+
+    callback && callback(null,primes);
+    return primes; //resolved.
+}
+
+
+
+
 //should return abort message and exit
 const primeRange = function *(min,max){
 
