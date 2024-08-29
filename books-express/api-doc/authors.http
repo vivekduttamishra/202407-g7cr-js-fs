@@ -1,0 +1,10 @@
+### get all authors
+GET http://localhost:8000/authors
+
+### add a new author
+POST http://localhost:8000/authors
+
+
+
+### put an author
+PUT http://localhost:8000/authors

@@ -19,9 +19,26 @@ var contentMapper={
     ".gif": {encoding:"", contentType:"image/gif"}
 }
 
+var defaultFiles=["index.html","default.html","home.html"];
+function setRequestedFile(request,response){
+    if(request.url==="/"){
+        //find if any default is available.
+        console.log('checking for default file');
+        
+        var defaultFile=defaultFiles.find(file=>fs.existsSync(`wwwroot/${file}`));
+        console.log('defaultFile',defaultFile);
+        
+        if(defaultFile)
+            request.url+=defaultFile;
+    }
+}
+
+
 function serveStaticFiles(request,response){
  
-    console.log('request.url',request.url);
+    console.log('original request.url',request.url);
+    setRequestedFile(request,response);
+    console.log('updated request.url',request.url);
    
     var url =request.url;
     var index=url.indexOf('?');
@@ -32,7 +49,7 @@ function serveStaticFiles(request,response){
         url.substring(index+1).split('&').forEach( str=>{
             var [key,value]=str.split('=');
             queryStrings[key]=value;
-        });
+        }); 
 
         
         url=url.substring(0,index)
@@ -44,6 +61,7 @@ function serveStaticFiles(request,response){
    
     var fullPath=`wwwroot${url}`;
 
+   
     //if yes read the file and add to respone
     
     console.log('searching',fullPath);
@@ -57,7 +75,7 @@ function serveStaticFiles(request,response){
         }
 
 
-        //response.setHeader('Content-Type', mapper.contentType);
+        response.setHeader('Content-Type', mapper.contentType);
         
         fs
             .createReadStream(fullPath)
