@@ -1,19 +1,10 @@
 var http=require('http');
+var {serveStaticFiles} = require('./static-file-server');
 
-console.log("Welcome to Book's Server");
-
-
-var server =http.createServer(function(req,res){
-    //this function will receive all the requests by the client.
-   var url=req.url;
-   if(url==='/date')
-        res.end( new Date().toLocaleDateString());
-    else if(url==='/time')
-        res.end(new Date().toLocaleTimeString());
-    else{
-        res.statusCode=404;
-        res.end(`NOT FOUND: ${url}`);
-    }
+var server =http.createServer(function(request,response){
+   
+    console.log(`${request.method} ${request.url}`);
+    serveStaticFiles(request,response);
 
 });
 
