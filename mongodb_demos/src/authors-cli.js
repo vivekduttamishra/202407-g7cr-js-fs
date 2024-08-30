@@ -12,13 +12,15 @@ app.addCommand(getAuthorById, "author","Get an author by ID", "get-author","auth
 
 // vivek-dutta-msihra,  "Vivek Dutta Mishra", " "
 app.addCommand(async(id,name,biography,photo,age)=>{
-    return await addAuthor({
+    var result= await addAuthor({
         id,
         name,
         age:parseInt(age),
         biography,
-        photo
+        photo 
     });
+
+    console.log(result);
 
 },"author-add","Add a new author");
 

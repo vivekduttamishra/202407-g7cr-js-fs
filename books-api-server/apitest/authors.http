@@ -1,0 +1,31 @@
+### get all authors
+GET http://localhost:8000/api/authors
+
+
+### CREATE A NEW AUTHO
+POST http://localhost:8000/api/authors
+
+
+### get author vivek-dutta-mishra
+GET http://localhost:8000/api/authors/vivek-dutta-mishra
+
+### get author with invalid id
+GET http://localhost:8000/api/authors/invalid-id
+
+
+### update author vivek-dutta-mishra
+PUT http://localhost:8000/api/authors/vivek-dutta-mishra
+
+
+### DLETE author vivek-dutta-mishra
+DELETE  http://localhost:8000/api/authors/vivek-dutta-mishra
+
+
+### get books by author vivek-dutta-mishra
+GET http://localhost:8000/api/authors/vivek-dutta-mishra/books
+
+
+
+
+
+

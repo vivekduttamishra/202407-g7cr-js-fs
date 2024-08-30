@@ -1,5 +1,5 @@
 var express = require('express');
-var {getAllAuthors} = require('./db/authors');
+var {getAllAuthors,addAuthor} = require('./db/authors');
 
 
 function createApp() {
@@ -22,9 +22,14 @@ function createApp() {
         response.send(authors);
     });
 
-    app.post('/authors', function (request, response) {
-        
     
+
+    app.post('/authors', async function (request, response) {
+        var author=request.body;
+        
+        var result =await addAuthor(author);
+        
+        response.send(result);
     });
 
     return app;    

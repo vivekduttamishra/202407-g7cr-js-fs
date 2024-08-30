@@ -148,7 +148,7 @@ var app=(function(){
         $("#book-id").val(book._id);
         $("#book-cover").val(book.cover);
 
-        $("#book-cover-image").src(book.cover);
+        $("#book-cover-image").attr('src',book.cover);//.src(book.cover);
 
     }
 
@@ -196,12 +196,18 @@ var app=(function(){
 
     var handleSave=function(){
         var book=fromEditor();
+        console.log('Saving',book);
+        
         if(book._id){
             console.log('updating',book);
             bookManager.updateBook(book);
+            console.log('updated',book);
+            
+            
         } else{
             console.log('adding',book);
             bookManager.addBook(book);
+            
             refreshBookList(bookManager.getBooks());
         }
         
