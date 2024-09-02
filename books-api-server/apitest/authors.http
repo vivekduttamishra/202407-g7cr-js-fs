@@ -4,6 +4,13 @@ GET http://localhost:8000/api/authors
 
 ### CREATE A NEW AUTHO
 POST http://localhost:8000/api/authors
+content-type:application/json
+
+{
+    "name": "Jeffrey Archer",
+    "biography":"Leading author of contemporary ficiton"
+
+}
 
 
 ### get author vivek-dutta-mishra

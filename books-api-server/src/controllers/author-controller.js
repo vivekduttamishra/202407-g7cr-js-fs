@@ -1,40 +1,65 @@
 
-let authorRepository= require('../repositories/in-memory/in-memory-author-repository');
-let AuthorService = require('../services/author-service');
-
-var service = new AuthorService(authorRepository);
-
-async function getAllAuthors(request,response){
-    var authors= await service.getAllAuthors();
-    response.send(authors);
-}
-
-async function getAuthors(){
-    return await service.getAllAuthors();  //auto response.send
-}
 
 
-async function getAuthorById(request,response){
-   try{
-        var author=await service.getAuthorById(request.params.authorId);
+
+class AuthorsController{
+
+    constructor(authorService){
+        this.service=  authorService;
+        console.log('service object', this.service);
+
+        this.getAuthorById=this.getAuthorById.bind(this);
+    }
+
+    getAllAuthors=async(request,response)=>{
+        var authors= await this.service.getAllAuthors();
+        response.send(authors);
+    }
+    
+    async getAuthorById(request,response){
+        var author=await this.service.getAuthorById(request.params.authorId);
         response.send(author);
-   }catch(err){
-        console.log('err',err);
+    }
+
+    addAuthor=async (request,response)=>{
+        // console.log('request.body',request.body);
+        // console.log('request.json',request.json);
+        var result =await this.service.addAuthor(request.body);
+        response.status(201).send(result);
         
-        response.status(404).send(err.info);
-   }
-}
+    }
+
+    updateAuthor=async(request,response)=>{
+        var updatedAuthor= await this.service.updateAuthor(request.params.authorId,request.body);
+        response.status(202).send(updatedAuthor);
+    }
+
+    removeAuthor=async(request,response)=>{
+        await this.service.removeAuthor(request.params.authorId);
+        response.status(204).send();
+    }
+
+    search=async(request,response)=>{
+        var result = await this.service.search(request.query["q"]);
+        response.send(result);
+    }
+
+    
+
+}    
 
 
-async function getById({params}){
-    //auto response.send
-    //auto handle error
-    return await service.getAuthorById(params.authorId);  
-}
+
+// async getAuthors(){
+//     return await this.service.getAllAuthors();  //auto response.send
+// }
+
+// async function getById({params}){
+//     //auto response.send
+//     //auto handle error
+//     return await service.getAuthorById(params.authorId);  
+// }
 
 
-module.exports={
-    getAllAuthors,
-    getAuthorById,
- };
+module.exports=AuthorsController;
 

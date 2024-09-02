@@ -1,30 +1,29 @@
 let express = require('express');
-let authorController = require('../controllers/author-controller');
+let authorRepository= require('../repositories/in-memory/in-memory-author-repository');
+let AuthorService = require('../services/author-service');
 
+let AuthorController = require('../controllers/author-controller');
+
+let authorController=new AuthorController(new AuthorService(authorRepository));
 
 
 var authors = express.Router();
 
+//Root:   /api/authors/
 authors.route("/")
-    .get(authorController.getAllAuthors)
-    .post((request, response) => {
-        response.send('creating a new author')
-    });
+    .get(authorController.getAllAuthors.bind(authorController))
+    .post(authorController.addAuthor);
 
 
 authors.route("/:authorId")
     .get(authorController.getAuthorById)
-    .put((request, response) => {
-        response.send(`updating author ${request.params.authorId}`);
-    })
-    .delete((request, response) => {
-        response.send(`deleting author ${request.params.authorId}`);
-    });
+    .put(authorController.updateAuthor)
+    .delete(authorController.removeAuthor);
 
 authors
     .route("/:authorId/books")
     .get((request, response) => {
-        response.send(`fetching books for author ${request.params.authorId}`);
+        response.status(501).send({message:'Not Yet Implemented',status:'Work in Progress',puprose:'GetAll Books by the Author'});
     })
 
 

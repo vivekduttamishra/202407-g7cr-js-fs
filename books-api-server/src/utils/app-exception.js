@@ -1,4 +1,4 @@
-class NotFoundException extends Error{
+class AppException extends Error{
     constructor(message, params){
         super(message);
         this.info={
@@ -8,4 +8,4 @@ class NotFoundException extends Error{
     }
 }
 
-module.exports=NotFoundException;
+module.exports=AppException;
