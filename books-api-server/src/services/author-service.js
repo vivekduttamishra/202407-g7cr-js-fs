@@ -12,13 +12,13 @@ class AuthorService{
 
     getAuthorById=async(id)=>{
         return await this.authorRepository.getAuthorById(id);
-    }
+    }  
 
     _validate= author=>{
         if(!author.name)
-            throw ValidationException('Missing Author Name');
+            throw new ValidationException('Missing Author Name');
         if(!author.biography)
-            throw ValidationException('Missing Author Biography');
+            throw new ValidationException('Missing Author Biography');
     }
 
     addAuthor=async(author)=>{

@@ -7,26 +7,22 @@ let AuthorRepository = require('../repositories/mongoose/mongoose-author-reposit
 let AuthorController = require('../controllers/author-controller');
 
 let authorRepository = new AuthorRepository();
-const service=new AuthorService(authorRepository);
-let authorController=new AuthorController(service);
 
-const {handleRequest} = require('../utils/http-handler');
-
-
+let authorController=new AuthorController(new AuthorService(authorRepository));
 
 
 var authors = express.Router();
 
 //Root:   /api/authors/
 authors.route("/")
-    .get(handleRequest(service.getAllAuthors))
+    .get(authorController.getAllAuthors.bind(authorController))
     .post(authorController.addAuthor);
 
 
 authors.route("/:authorId")
-    .get(handleRequest(authorController.getAuthorById))
-    .put(handleRequest(authorController.updateAuthor))
-    .delete(handleRequest(authorController.removeAuthor));
+    .get(authorController.getAuthorById)
+    .put(authorController.updateAuthor)
+    .delete(authorController.removeAuthor);
 
 authors
     .route("/:authorId/books")

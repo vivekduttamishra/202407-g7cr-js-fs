@@ -1,4 +1,4 @@
-const {Response} =require('../utils/http-handler');
+
 
 
 
@@ -11,36 +11,32 @@ class AuthorsController{
         this.getAuthorById=this.getAuthorById.bind(this);
     }
 
-    getAllAuthors=async()=>{
-        return await this.service.getAllAuthors();       
+    getAllAuthors=async(request,response)=>{
+        var authors= await this.service.getAllAuthors();
+        response.send(authors);
     }
     
-    async getAuthorById({authorId}){
-        var author=await this.service.getAuthorById(authorId);
-        return author;
+    async getAuthorById(request,response){
+        var author=await this.service.getAuthorById(request.params.authorId);
+        response.send(author);
     }
 
-    addAuthor=async ({body})=>{
+    addAuthor=async (request,response)=>{
         // console.log('request.body',request.body);
         // console.log('request.json',request.json);
-        var result = await this.service.addAuthor(body);
-        console.log('author added');
-        return new Response(result, 201,{
-            location:`/api/authors/${result.id}`
-        });
+        var result =await this.service.addAuthor(request.body);
+        response.status(201).send(result);
+        
     }
 
-    updateAuthor=async({authorId,body})=>{
-        var updatedAuthor= await this.service.updateAuthor(authorId,body);
-        return updatedAuthor;
+    updateAuthor=async(request,response)=>{
+        var updatedAuthor= await this.service.updateAuthor(request.params.authorId,request.body);
+        response.status(202).send(updatedAuthor);
     }
 
-    removeAuthor=async({authorId,response})=>{
-        await this.service.removeAuthor(authorId);
+    removeAuthor=async(request,response)=>{
+        await this.service.removeAuthor(request.params.authorId);
         response.status(204).send();
-
-        //returns undefined.
-        //handleRequest will not reply now.
     }
 
     search=async(request,response)=>{

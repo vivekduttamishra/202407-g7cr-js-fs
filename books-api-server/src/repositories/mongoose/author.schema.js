@@ -1,13 +1,19 @@
 var mongoose = require('mongoose');
 
 var authorSchema = new mongoose.Schema({
-    id:string,
-    name:string,
-    biography:string,
-    cover:string,
-    tags:[string]
+    id:{type: String, required: true, unique: true},
+    name:{type:String, required:true},
+    biography:{type:String, required:true, minLength:50, maxLength:5000},
+    photo:{type:String, required:true},
+    tags:[String]
 });
 
+
+authorSchema.pre('save',function(){
+    if(this.id===undefined){
+        this.id=this.name.toLowerCase().split(' ').join('-');
+    }
+});
 
 /**
  * Parameter

@@ -1,4 +1,4 @@
-
+const Author = require('./author.schema');
 
 class AuthorRepository{
     constructor(){
@@ -7,13 +7,25 @@ class AuthorRepository{
 
     getAllAuthors=async()=>{
 
+       return  await Author.find({});
+
     }
     getAuthorById=async(id)=>{
 
-    }
-    addAuthor=async(author)=>{
+        return await Author.findOne({id});
 
     }
+
+    addAuthor=async(author)=>{
+
+        var newAuthor = new Author(author);
+        
+        var dbAuthor= await newAuthor.save();
+        return dbAuthor;
+
+    }
+
+
     removeAuthor=async(id)=>{
 
     }
@@ -26,3 +38,5 @@ class AuthorRepository{
 
     
 }
+
+module.exports = AuthorRepository;
