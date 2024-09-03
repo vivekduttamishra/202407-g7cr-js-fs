@@ -13,20 +13,18 @@ const {handleRequest} = require('../utils/http-handler');
 const {injector} = require('../utils/injector');
 
 
-// var service = injector.lookup('authorService'); //created with undefined repository
-// service.repository=injector.lookup('authorRepository');
+var service = injector.lookup('authorService'); //created with undefined repository
+service.repository=injector.lookup('authorRepository');
 
-// var controller = injector.lookup('authorController'); //created with undefined service
-// controller.service=service;
-
-var authorController = injector.lookup('authorController');
+var controller = injector.lookup('authorController'); //created with undefined service
+controller.service=service;
 
 
 var authors = express.Router();
 
 //Root:   /api/authors/
 authors.route("/")
-    .get(handleRequest(authorController.getAllAuthors))
+    .get(handleRequest(service.getAllAuthors))
     .post(handleRequest(authorController.addAuthor));
 
 

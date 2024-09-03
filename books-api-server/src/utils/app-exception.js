@@ -1,9 +1,9 @@
 class AppException extends Error{
-    constructor(message, params){
+    constructor(message, errors){
         super(message);
-        this.info={
+        this.errors={
             message,
-            ...params
+            ...errors
         }
     }
 }

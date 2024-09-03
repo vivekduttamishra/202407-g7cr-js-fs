@@ -6,14 +6,12 @@ GET http://localhost:8000/api/authors
 
 
 ### ADDING INVALID AUTHOR INFO
-POST http://shivoham:8000/api/authors
-content-type:application/json
+POST http://localhost:8000/api/authors
+CONTENT-TYPE: application/json
 
-{
-    "id":"author-101",
+{    
     "name": 101,
-    "biography":"One of the greatest classic author of French and English",
-    "photo":"dumas.png"
+    "biography":"Hi"
 }
 
 
@@ -56,7 +54,7 @@ CONTENT-TYPE: application/json
 
 {
     "name":"Alexandre Dumas",
-    "biography":"Original Biography",
+    "biography":"One of the greatest classic author of French and English. His book The Count of Monte Cristo is specially famous.",
     "photo":"dumas.png"
 }
 
@@ -70,6 +68,7 @@ PUT http://localhost:8000/api/authors/alexandre-dumas
 CONTENT-TYPE: application/json
 
 {
+    
     "name":"Alexandre Dumas",
     "biography":"Biography updated",
     "photo":"dumas_updated.png",

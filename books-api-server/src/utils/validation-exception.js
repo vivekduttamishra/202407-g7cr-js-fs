@@ -1,8 +1,8 @@
 const AppException =require('./app-exception');
 
 class ValidationException extends AppException{
-    constructor(...params){
-        super(...params);       
+    constructor(...errors){
+        super(...errors);       
     }
 }
 

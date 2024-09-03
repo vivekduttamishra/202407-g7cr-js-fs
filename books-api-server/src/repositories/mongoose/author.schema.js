@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var authorSchema = new mongoose.Schema({
-    id:{type: String, required: true, unique: true},
+    id:{type: String, unique: true},
     name:{type:String, required:true},
     biography:{type:String, required:true, minLength:50, maxLength:5000},
     photo:{type:String, required:true},

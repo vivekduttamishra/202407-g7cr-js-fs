@@ -1,4 +1,6 @@
-var ValidationException = require('../utils/validation-exception');
+let ValidationException = require('../utils/validation-exception');
+
+let NotFoundException = require('../utils/not-found-exception');
 
 class AuthorService{
 
@@ -11,7 +13,11 @@ class AuthorService{
     }
 
     getAuthorById=async(id)=>{
-        return await this.authorRepository.getAuthorById(id);
+
+        var author =await this.authorRepository.getAuthorById(id);
+        if(!author)
+            throw new NotFoundException( "Author Not Found",{id});
+        return author;
     }  
 
     _validate= author=>{
@@ -25,9 +31,9 @@ class AuthorService{
         //should validate author properties here.
         this._validate(author);
 
-        if(!author.id){
-            author.id=author.name.split(' ').join('-').toLowerCase();
-        }
+        // if(!author.id){
+        //     author.id=author.name.split(' ').join('-').toLowerCase();
+        // }
 
         return await this.authorRepository.addAuthor(author);
     }

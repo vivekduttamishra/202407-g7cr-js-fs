@@ -1,13 +1,15 @@
 
 let express = require('express');
 var toJson = require('./utils/request-json');
+require('./dependencies')(); //run the only function in this file.
 
-var  db = require('./repositories/mongoose/connection'); //
+
+//var  db = require('./repositories/mongoose/connection'); //
 
 
-//let configureAuthorRoutes = require('./routes/author-routes');
+const {injector} = require('./utils/injector');
 
-//console.log('toJson',toJson);
+const db = injector.lookup('db');
 
 
  const authorRoute = require('./routes/author-routes');
@@ -22,6 +24,7 @@ async function createApp(){
 
     //app.use(toJson);
 
+   
 
     app.use((request,response,next)=>{
         console.log(`recevied request: ${request.method} ${request.path}`)

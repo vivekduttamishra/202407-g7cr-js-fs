@@ -1,8 +1,5 @@
 const mongoose = require('mongoose');
 
-
-
-
 const ReviewSchema = new mongoose.Schema({
 
     reviewerName: String,
@@ -17,8 +14,8 @@ const Bookschema = new mongoose.Schema({
     id:String,
     title:String,
     authorId:{
-        type:String,
-        ref:'Author'
+        type:String
+        
     },
     description:String,
     price:Number,
@@ -26,4 +23,13 @@ const Bookschema = new mongoose.Schema({
 
 })
 
+Bookschema.virtual('authorDetails', {
+    ref: 'Author',        // The model to use
+    localField: 'authorId',  // The field in Book
+    foreignField: 'id',  // The field in Author
+    justOne: true        // Use `justOne` if you want to get a single document instead of an array
+});
+
 const Book = mongoose.model('Book', Bookschema,'books');
+
+module.exports={Book};

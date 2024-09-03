@@ -1,13 +1,13 @@
 const Author = require('./author.schema');
 
-class AuthorRepository{
+class MongooseAuthorRepository{
     constructor(){
 
     }
 
     getAllAuthors=async()=>{
 
-       return  await Author.find({});
+       return  await Author.find({},{_id:0,id:1,name:1,photo:1});
 
     }
     getAuthorById=async(id)=>{
@@ -29,7 +29,7 @@ class AuthorRepository{
     removeAuthor=async(id)=>{
 
     }
-    updateAuthors=async(id,author)=>{
+    updateAuthor=async(id,author)=>{
 
     }
     searchAuthors=async(q)=>{
@@ -39,4 +39,4 @@ class AuthorRepository{
     
 }
 
-module.exports = AuthorRepository;
+module.exports = MongooseAuthorRepository;

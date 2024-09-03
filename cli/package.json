@@ -1,0 +1,16 @@
+{
+  "name": "conceptarchitect-cli",
+  "version": "1.0.2",
+  "main": "cli.js",
+  "keywords": ["cli", "conceptarchitect", "command-line", "tools"],
+  "author": "Vivek Dutta Mishra <vivek@conceptarchitect.in>",
+  "license": "ISC",
+  "description": "A CLI application builder.",
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vivekduttamishra/conceptarchitect-cli.git"
+  }
+}
