@@ -1,0 +1,75 @@
+
+
+.header{
+    margin:0px;
+    color: white;
+    background:black;    
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+*{
+    margin:0px;
+}
+
+.header h1{
+    text-shadow: -2px -2px 2px coral;
+}
+
+body{
+    display:flex;
+    flex-direction: column;
+   
+    padding:0px;
+    margin:0px;
+    
+}
+
+.body{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    
+}
+
+
+.tic-tac-toe-component{
+    
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    
+    border: 2px solid gray;  
+    width:300px; 
+}
+
+
+.restart-component{
+    background:lightgreen;
+}
+
+.game-board-component{
+    width:150px;
+    padding:0px;
+    margin:10px;
+    
+
+}
+
+.box-component{
+    float:left;
+    background:white;
+    width:50px;
+    
+    height:50px;
+    font-family: 'Indie Flower';
+    font-size:40px;
+    border:1px solid gray;
+    cursor: pointer;
+    
+}
+
+

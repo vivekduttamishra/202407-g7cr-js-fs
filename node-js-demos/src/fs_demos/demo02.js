@@ -80,12 +80,9 @@ var counter = new Counter(1,10);
 var result=[];
 
 
-counter
-    .pipe(new JsonBuilder())
-    .pipe(new Collector(result))
-    .on('close',()=>{
-    console.log('result',result);
-    
-});
+counter                         //0 1 2 3 4 
+    .pipe(new JsonBuilder())   // "{index:0, value:0}" "{index:1,value:1}"
+    .on('data', data=>console.log(JSON.parse(data))); 
+
 
 
