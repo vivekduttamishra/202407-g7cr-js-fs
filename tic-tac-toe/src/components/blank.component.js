@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Blank=(props)=>{
+export const Blank=({})=>{
 
     return (
         <div className=''>

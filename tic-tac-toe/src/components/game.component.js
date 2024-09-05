@@ -15,7 +15,7 @@ export class Game extends React.Component {
         this.game=new TicTacToeGame();
 
         this.state=this.fetchGameState;
-        console.log('this.state',this.state);
+        //console.log('this.state',this.state);
         
 
     }
@@ -50,12 +50,17 @@ export class Game extends React.Component {
             ...this.fetchGameState,
         });
 
+        if(this.game.isOver){
+            this.props.onGameResult(this.game.winningPlayer);
+        }
+
     }
 
     
     
     
     reStart=()=>{
+        console.log('restarting');       
         this.game=new TicTacToeGame();
         this.setState({
             ...this.fetchGameState
@@ -71,9 +76,14 @@ export class Game extends React.Component {
                     <Status
                         message={this.state.message}
                     />
-                    <RestartButton onRestart={this.game.isOver && this.reStart} />
+                    {
+                       this.game.isOver  
+                            && <RestartButton onRestart={this.game.isOver && this.reStart} />
+                            
+                    }
                     <div className="same-row">
                         <GameBoard
+                            winner={this.state.winner}
                             cells={this.state.cells}
                             onCellClick={this.handleMove}
                         />
