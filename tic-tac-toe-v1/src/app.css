@@ -34,13 +34,8 @@ body{
     
 }
 
-.same-row{
-    display:flex;
-    flex-direction: row; /*default*/
-}
 
-
-.game-component{
+.tic-tac-toe-component{
     
     display:flex;
     justify-content: center;
@@ -48,34 +43,9 @@ body{
     align-items: center;
     
     border: 2px solid gray;  
-    width:400px; 
-
-
+    width:300px; 
 }
 
-
-.game-moves-component{
-    margin:10px;
-    width:200px;
-    border:2px solid green;
-    
-    
-}
-
-.game-moves-component table{
-    border:1px solid gray;
-    width:100%;
-}
-
-th{
-    background:black;
-    color:white;
-    font-weight: bold;
-}
-
-td{
-    border:1px solid gray;
-}
 
 .restart-component{
     background:lightgreen;
@@ -85,7 +55,6 @@ td{
     width:150px;
     padding:0px;
     margin:10px;
-    border:2px solid red;
     
 
 }

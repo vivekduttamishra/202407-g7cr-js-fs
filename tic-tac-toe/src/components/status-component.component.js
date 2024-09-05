@@ -1,10 +1,13 @@
 import React from 'react';
 
-export const Status=(props)=>{
+export const Status=({message, color='blue'})=>{
 
     return (
-        <h2 className='status-component'>
-           Next Move : 'O'
+        <h2 
+            style={{color}}
+            className='status-component'>
+           {message}
         </h2>
     )
 };
+
