@@ -4,6 +4,7 @@ import { GameBoard } from './game-board.component';
 import { RestartButton } from './restart-button.component';
 import { GameMoves } from './game-moves.component';
 import { TicTacToeGame } from '../services/tic-tac-toe-game.service';
+import { Timer } from './timer.component';
 
 export class Game extends React.Component {
 
@@ -87,9 +88,16 @@ export class Game extends React.Component {
                             cells={this.state.cells}
                             onCellClick={this.handleMove}
                         />
-                        <GameMoves
-                            moves={this.state.moves}
-                        />
+                        <div>
+                            <div className='timers same-row'>
+                                <Timer hideControls={true}  name="O" />
+                                <Timer hideControls name="X" />
+                            </div>
+                            <GameMoves
+                                moves={this.state.moves}
+                            />
+
+                        </div>
                     </div>
                 </div>
             </div>

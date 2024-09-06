@@ -119,3 +119,47 @@ td{
     border-radius: 10px;
     padding:10px;
 }
+
+.timers{
+    display:flex;
+    flex-direction: row;
+    justify-content:space-around;
+}
+
+.timer-component{
+    border:1px solid black;
+    margin:5px;
+    padding:5px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+    color:white;
+    font-family:'digital font';
+    box-shadow: -4px 4px 2px gray;
+    border-radius: 5px;
+    width:75px;
+}
+
+.timer{
+
+}
+
+.minutes{
+    font-size:18px;
+}
+
+.seconds{
+    font-size:18px;
+}
+
+.milliseconds{
+    font-size: 12px;
+}
+
+.timer-component img{
+    width:20px;
+    height:20px;
+   
+    margin:5px;
+}
