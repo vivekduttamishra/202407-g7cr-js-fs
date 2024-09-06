@@ -163,3 +163,11 @@ td{
    
     margin:5px;
 }
+
+.play-button{
+    background-color: lightgreen;
+}
+
+.play-button [disabled] {
+    background-color: gray;
+}

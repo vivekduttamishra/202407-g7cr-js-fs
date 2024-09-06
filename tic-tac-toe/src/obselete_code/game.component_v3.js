@@ -21,13 +21,6 @@ export class Game extends React.Component {
         //console.log('this.state',this.state);
         this.state.running=false;
         this.state.reset=false;
-
-        this.timers={
-            O: React.createRef(),
-            X: React.createRef()
-        }
-
-
     }
 
     get fetchGameState(){
@@ -72,19 +65,12 @@ export class Game extends React.Component {
     }
 
     handlePlay=()=>{
-
-        this.timers.O.current.reset();
-        this.timers.X.current.reset();
-
-        
         this.game=new TicTacToeGame();
         this.setState({
             ...this.fetchGameState,
             running:true,
             reset:true,
         });
-
-        
     }
     
     //obselete code
@@ -132,10 +118,7 @@ export class Game extends React.Component {
                         <div>
                             <div className='timers same-row'>
                                 <Timer 
-                                        ref={this.timers.O}
-
-                                        hideControls={true}
-                                        
+                                        hideControls={true}  
                                         running={this.state.next==='O' && this.state.running}
                                         name="O" 
                                         onPause={this.handlePause}
@@ -144,7 +127,6 @@ export class Game extends React.Component {
                                         
                                         />
                                 <Timer 
-                                        ref={this.timers.X}
                                         running={this.state.next==='X' && this.state.running}
                                         hideControls name="X"
                                         onPause={this.handlePause}

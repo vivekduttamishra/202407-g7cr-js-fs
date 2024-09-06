@@ -13,13 +13,6 @@ export class Timer extends React.Component {
         }
     }
 
-    reset = () => {
-        if (this.state.running && this.iid)
-            clearInterval(this.iid);
-        this.setState({ ms: 0, running: false });
-    }
-
-
     startButtonImage='/images/start.png'
     pauseButtonImage='/images/pause.png'
     resetButtonImage='/images/reset.png'
@@ -45,7 +38,12 @@ export class Timer extends React.Component {
         this.setState(state => state.running = !state.running);
     }
 
- 
+    reset = () => {
+        this.setState({ ms: 0, running: false });
+        if (this.state.running && this.iid)
+            clearInterval(this.iid);
+    }
+
     zeroPadded=(value,digits=2)=>{
         let str=value.toString();
         let zeros= digits-str.length;
@@ -71,6 +69,10 @@ export class Timer extends React.Component {
             this.setState({running: this.props.running});
        } 
 
+       if(this.props.reset){
+            this.reset();
+            this.props.onReset();
+       }
     }
 
     render = () => {

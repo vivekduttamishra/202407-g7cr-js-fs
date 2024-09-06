@@ -10,7 +10,7 @@ export class GameSeries extends React.Component{
         X:0,
         O:0,
         draw:0,
-        showClock:true,
+        showClock:false,
     }
 
     handleGameResult=(winner)=>{
@@ -34,8 +34,7 @@ export class GameSeries extends React.Component{
 
         return (
             <div className='game-series-component'>
-                <button onClick={handleToggle}>ToggleClock</button>
-                {this.state.showClock && <Clock/>}
+                
                <GameScoreboard {...this.state} />
                <Game onGameResult={this.handleGameResult}/>
             </div>
