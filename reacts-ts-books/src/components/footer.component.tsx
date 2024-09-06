@@ -1,10 +1,16 @@
 import React from 'react';
+  
+interface FooterProps{
+    children?:any   
+}
 
-export const Footer = ({})=>{
+export const Footer = ({children}:FooterProps)=>{
+
+   
 
     return (
-        <div>
-            Footer
+        <div className="footer">
+            {children}
         </div>
     );
 
