@@ -1,13 +1,15 @@
 import React from 'react';
+import { Author } from '../services/author';
 
 interface AuthorListProps{
     authors: any[],
-    onAuthorSelect: (author: any) => void
+    onAuthorSelect: (author: Author|null) => void 
 }
 
 export const AuthorList=(props:AuthorListProps)=>{
 
     
+   
 
 
     return (

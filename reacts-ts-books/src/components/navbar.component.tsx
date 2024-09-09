@@ -5,11 +5,12 @@ import 'bootstrap/dist/js/bootstrap'
 
 interface NavbarProps {
     title: string,
-    slogan?: string
+    slogan?: string,
+    
 }
 
 
-export const NavBar = ({ title, }: NavbarProps) => {
+export const NavBar = ({ title}: NavbarProps) => {
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -21,10 +22,10 @@ export const NavBar = ({ title, }: NavbarProps) => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">Authors</a>
+                            <a className="nav-link active" aria-current="page" href='/authors'>Authors</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Add Author</a>
+                            <a className="nav-link" href="/author/add" >Add Author</a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" aria-current="page" href="#">Books</a>

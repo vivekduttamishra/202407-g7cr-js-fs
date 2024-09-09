@@ -1,6 +1,7 @@
 import React from 'react';
-import { AuthorList } from '../components/author-list.component';
-import { AuthorDetails } from '../components/author-details.component';
+import { AuthorList } from '../../components/author-list.component';
+import { AuthorDetails } from '../../components/author-details.component';
+import { Author } from '../../services/author';
 
 let authorsList=[
     {
@@ -185,7 +186,7 @@ let authorsList=[
 
 export const AuthorManageScreen = ({ }) => {
 
-    const [selectedAuthor, setSelectedAuthor]=React.useState(null);
+    const [selectedAuthor, setSelectedAuthor]=React.useState<Author|null>(null);
 
     const [authors, updateAuthors]= React.useState(authorsList);
 
