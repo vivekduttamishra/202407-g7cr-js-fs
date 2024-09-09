@@ -43,3 +43,15 @@
     border-radius: 20px;
     box-shadow: -2px -2px 2px gray;
   }
+
+  fieldset{
+    border:1px solid gray !important;
+    padding:10px !important;
+  }
+
+  legend{
+    color:gray;
+    font-weight: bold;
+    margin-bottom: 10px !important;
+  }
+

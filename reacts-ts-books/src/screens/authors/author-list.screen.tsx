@@ -1,6 +1,7 @@
 import React,{useState, useEffect} from'react';
 import { AuthorList } from '../../components/author-list.component';
 import { Author } from '../../services/author';
+import { Link } from 'react-router-dom';
 
 
 export interface AuthorListScreenProps{
@@ -24,7 +25,8 @@ export const AuthorListScreen = (props:AuthorListScreenProps) => {
             {
                 authors.map((author)=>(
                 <li key={author.id}>
-                    <a href={`/author/details/${author.id}`}>{author.name}</a>
+                    {/* <a href={`/author/details/${author.id}`}>{author.name}</a> */}
+                    <Link to={`/author/details/${author.id}`} >{author.name}</Link>
                 </li>))
             }   
             </ul>      
