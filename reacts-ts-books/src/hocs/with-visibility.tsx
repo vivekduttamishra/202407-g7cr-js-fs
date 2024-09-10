@@ -1,3 +1,9 @@
+import { ComponentType } from "react";
+
+
+
+
+
 
 export const withVisibility=(Component:any)=>{
     return (props:any)=>{

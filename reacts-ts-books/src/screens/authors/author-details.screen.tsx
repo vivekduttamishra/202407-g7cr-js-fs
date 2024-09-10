@@ -5,6 +5,9 @@ import { useParams } from 'react-router-dom';
 import { Author } from '../../services/author';
 import AuthorInfo from '../../components/author-info.component';
 import { NotFound } from '../../components/not-found.component';
+import { AuthorDetails } from '../../components/author-details.component';
+import { InMemoryAuthorService } from '../../services/in-memory-author.service';
+import { useAuthorContext } from '../../contexts/author.context';
 
 
 export interface AuthorDetailsScreenProps {
@@ -17,24 +20,22 @@ export const AuthorDetailsScreen = (props: AuthorDetailsScreenProps) => {
 
     //type OptionalAuthor= Author|undefined;
 
-    const authors = [
-        { name: 'Vivek Dutta Mishra', id: 'vivek' },
-        { name: 'Ramdhari Singh Dinkar', id: 'dinkar' },
-        { name: 'Jeffrey Archer', id: 'jeffrey-archer' },
-    ]
+    //const authorService = new InMemoryAuthorService();
+
+    const authorService = useAuthorContext();
+    
+   
     let { id } = useParams();
 
-    let author = authors.find(author => author.id === id);
+    let author = authorService.getAuthorById(id!);
 
 
 
-    return <AuthorInfo
-        author={author}
-        title="Author Info"
-
-        visibility={author !== undefined}
-        otherwise={<NotFound message={`Invalid Id: ${id}`}/>}
-    />
+    return <AuthorDetails 
+                    author={author}
+                    visibility={author!==undefined}
+                    otherwise={<NotFound message={`Invalid Author Id ${id}`} />}
+            />;
 
 
     // if(!author)

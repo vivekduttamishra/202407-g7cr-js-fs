@@ -1,0 +1,173 @@
+
+
+.header{
+    margin:0px;
+    color: white;
+    background:black;    
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+*{
+    margin:0px;
+}
+
+.header h1{
+    text-shadow: -2px -2px 2px coral;
+}
+
+body{
+    display:flex;
+    flex-direction: column;
+   
+    padding:0px;
+    margin:0px;
+    
+}
+
+.body{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    
+}
+
+.same-row{
+    display:flex;
+    flex-direction: row; /*default*/
+}
+
+
+.game-component{
+    
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    
+    border: 2px solid gray;  
+    width:400px; 
+
+
+}
+
+
+.game-moves-component{
+    margin:10px;
+    width:200px;
+    
+    
+    
+}
+
+.game-moves-component table{
+    border:1px solid gray;
+    width:100%;
+}
+
+th{
+    background:black;
+    color:white;
+    font-weight: bold;
+}
+
+td{
+    border:1px solid gray;
+}
+
+.restart-component{
+    background:lightgreen;
+}
+
+.game-board-component{
+    width:150px;
+    padding:0px;
+    margin:10px;
+    
+    
+
+}
+
+.box-component{
+    float:left;
+    background:white;
+    width:50px;
+    
+    height:50px;
+    font-family: 'Indie Flower';
+    font-size:40px;
+    border:1px solid gray;
+    cursor: pointer;
+    
+}
+
+
+.game-series-component{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.game-scoreboard-component{
+    margin-bottom: 20px;
+    border: 1px solid gray;
+    text-align: center;
+    box-shadow: -5px -5px 5px gray;
+    border-radius: 10px;
+    padding:10px;
+}
+
+.timers{
+    display:flex;
+    flex-direction: row;
+    justify-content:space-around;
+}
+
+.timer-component{
+    border:1px solid black;
+    margin:5px;
+    padding:5px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+    color:white;
+    font-family:'digital font';
+    box-shadow: -4px 4px 2px gray;
+    border-radius: 5px;
+    width:75px;
+}
+
+.timer{
+
+}
+
+.minutes{
+    font-size:18px;
+}
+
+.seconds{
+    font-size:18px;
+}
+
+.milliseconds{
+    font-size: 12px;
+}
+
+.timer-component img{
+    width:20px;
+    height:20px;
+   
+    margin:5px;
+}
+
+.play-button{
+    background-color: lightgreen;
+}
+
+.play-button [disabled] {
+    background-color: gray;
+}

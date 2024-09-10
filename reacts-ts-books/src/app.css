@@ -17,6 +17,7 @@
 
   .screen{
     margin:10px;
+    padding-bottom: 50px;
   }
 
   .author-details{
@@ -55,3 +56,7 @@
     margin-bottom: 10px !important;
   }
 
+  .error-input{
+    /* border:1px solid red !important; */
+    background-color:lightpink !important;
+  }

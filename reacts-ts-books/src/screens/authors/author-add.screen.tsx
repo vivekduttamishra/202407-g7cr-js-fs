@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { LabeledInput, TextArea } from '../../components/input.component';
+import { Author } from '../../services/author';
 
 
 export interface AuthorAddScreenProps {
@@ -7,7 +9,31 @@ export interface AuthorAddScreenProps {
 }
 
 
+let dummyAuthor:Author={
+    name:"",
+    id:"",
+    biography:"",
+    photo:"",
+    tags:[],
+}
+
 export const AuthorAddScreen = (props: AuthorAddScreenProps) => {
+
+    const [author,setAuthor]=useState(dummyAuthor);
+
+    const handleAuthorUpdate=(value:any, id:string)=>{
+        if(id==='tags'){
+            value=value.split(',')
+        }
+        setAuthor({
+            ...author,
+            [id]:value
+        });
+    }
+
+    const handleSave=()=>{
+        console.log('saving',author);
+    }
 
 
     return (
@@ -18,61 +44,20 @@ export const AuthorAddScreen = (props: AuthorAddScreenProps) => {
             <hr />
             <div className="row">
                 <div className="col-12">
-                    <div className="mb-3">
-                        {/* <label htmlFor="basic-url" className="form-label">Your vanity URL</label> */}
-                        <div className="input-group">
-                            <span className="input-group-text" id="basic-addon3">Name</span>
-                            <input type="text" className="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4" />
-                        </div>
-                        {/* <div className="form-text" id="basic-addon4">Example help text goes outside the input group.</div> */}
-                    </div>
-                    <div className="mb-3">
-                        {/* <label htmlFor="basic-url" className="form-label">Your vanity URL</label> */}
-                        <div className="input-group">
-                            <span className="input-group-text" id="basic-addon3">ID</span>
-                            <input type="text" className="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4" />
-                        </div>
-                        {/* <div className="form-text" id="basic-addon4">Example help text goes outside the input group.</div> */}
-                    </div>
-                    <div className="mb-3">
-                        {/* <label htmlFor="basic-url" className="form-label">Your vanity URL</label> */}
-                        <div className="input-group">
-                            <span className="input-group-text" id="basic-addon3">Photo URL</span>
-                            <input type="text" className="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4" />
-                        </div>
-                        {/* <div className="form-text" id="basic-addon4">Example help text goes outside the input group.</div> */}
-                    </div>
-                    <div className="mb-3">
-                        {/* <label htmlFor="basic-url" className="form-label">Your vanity URL</label> */}
-                        <div className="input-group">
-                            <span className="input-group-text" id="basic-addon3">Tags</span>
-                            <input type="text" className="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4" />
-                        </div>
-                        {/* <div className="form-text" id="basic-addon4">Example help text goes outside the input group.</div> */}
-                    </div>
-                    <div className="input-group mb-3">
-  <button className="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Social</button>
-  <ul className="dropdown-menu">
-    <li><a className="dropdown-item" href="#">Web</a></li>
-    <li><a className="dropdown-item" href="#">Email</a></li>
-    <li><a className="dropdown-item" href="#">Twitter</a></li>
-    <li><a className="dropdown-item" href="#">Instagram</a></li>
-    <li><a className="dropdown-item" href="#">Facebook</a></li>
-    <li><hr className="dropdown-divider"/></li>
-    <li><a className="dropdown-item" href="#">Custom</a></li>
-
-  </ul>
-
-  <input type="text" className="form-control" aria-label="Text input with dropdown button"/>
-  <button className="btn btn-outline-secondary" type="button">Add</button>
-</div>
-
-                    <div className="input-group">
-                        <span className="input-group-text">Biography</span>
-                        <textarea className="form-control" aria-label="With textarea"></textarea>
-                    </div>
-                    <p/>
-                    <button className='btn btn-primary form-control'>Add Author</button>
+                    <LabeledInput id="name" value={author.name} onUpdate={handleAuthorUpdate}/>
+                    <LabeledInput id="id" value={author.id} onUpdate={handleAuthorUpdate} />
+                    <LabeledInput id="photo" value={author.photo} onUpdate={handleAuthorUpdate} />
+                    <LabeledInput  id="biography" 
+                                   value={author.biography} 
+                                   onUpdate={handleAuthorUpdate} 
+                                   componentBuilder={(props:any)=><TextArea  {...props}/>}
+                                   
+                                   />
+                    <LabeledInput id="tags" value={author.tags} onUpdate={handleAuthorUpdate} />
+                    <p />
+                    <button 
+                        onClick={handleSave}
+                    className='btn btn-primary form-control'>Add Author</button>
 
                 </div>
 

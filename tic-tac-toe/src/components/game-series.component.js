@@ -1,43 +1,45 @@
 import React from 'react';
 import { GameScoreboard } from './game-scoreboard.component';
 import { Game } from './game.component';
-import { Clock } from './clock.component';
 
-export class GameSeries extends React.Component{
+export const GameSeries = () => {
 
-    state={
-        games:0,
-        X:0,
-        O:0,
-        draw:0,
-        showClock:false,
-    }
+    const _score= {
+        games: 0,
+        X: 0,
+        O: 0,
+        draw: 0,
+    };
 
-    handleGameResult=(winner)=>{
-        var newState={...this.state};
-        if(winner)
-            newState[winner]++;
-        else
-            newState.draw++;
+    const [score,setScore]=React.useState(_score);
 
-        newState.games++;
 
-        this.setState({...newState});
-
-    }
-
-    render =()=>{        
-
-        const handleToggle=()=>{
-            this.setState({showClock:!this.state.showClock})
+    const handleGameResult = (result) => {
+        score.games++;
+        if(result.winner){
+            score[result.winner]++;
+        } else if(result.timers.O>result.timers.X){
+            score.O+=0.50
+            score.X+=0.25
+        } else if(result.timers.O<result.timers.X){
+           score.O+=0.25;
+           score.X+=0.50
         }
 
-        return (
-            <div className='game-series-component'>
-                
-               <GameScoreboard {...this.state} />
-               <Game onGameResult={this.handleGameResult}/>
-            </div>
-        )
+        if(!result.winner){
+            score.draw++;
+        }
+
+        setScore({ ...score });
+
     }
+
+
+    return (
+        <div className='game-series-component'>
+
+            <GameScoreboard {...score} />
+            <Game onGameResult={handleGameResult} />
+        </div>
+    )
 };

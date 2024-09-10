@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/js/bootstrap'
 import { Link } from 'react-router-dom';
+import { Membership } from './membership.component';
 
 
 
@@ -38,19 +39,8 @@ export const NavBar = ({ title}: NavbarProps) => {
 
                     </ul>
 
-                    <ul className="navbar-nav mb-2 mb-lg-0 d-flex">
-                        <li className="nav-item dropdown ">
-                            <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Members
-                            </Link>
-                            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><Link className="dropdown-item" to="/user/login">Login</Link></li>
-                                <li><Link className="dropdown-item" to="/user/register">Register</Link></li>
-                                <li><hr className="dropdown-divider" /></li>
-                                <li><Link className="dropdown-item" to="/user/logout">Logout</Link></li>
-                            </ul>
-                        </li>
-                    </ul>
+                    <Membership/>
+                   
 
                 </div>
             </div>

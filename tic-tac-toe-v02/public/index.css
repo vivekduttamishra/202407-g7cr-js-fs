@@ -1,0 +1,15 @@
+@font-face {
+    font-family: 'Indie Flower';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(/fonts/IndieFlower-Regular.ttf) ;
+}
+
+@font-face {
+    font-family: 'Digital Font';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(/fonts/ProtestGuerrilla-Regular.ttf) ;
+}

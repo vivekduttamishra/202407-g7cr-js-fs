@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React from 'react';
 import { Status } from './status-component.component';
 import { GameBoard } from './game-board.component';
 //import { RestartButton } from './restart-button.component';
@@ -7,51 +7,6 @@ import { TicTacToeGame } from '../services/tic-tac-toe-game.service';
 import { Timer } from './timer.component';
 import { If } from './if.component';
 import { PlayButton } from './play-button.component';
-
-// export const _Game = ({onGameResult})=>{
-
-   
-//     const [game,updateGame]=useState(gameState(new TicTacToeGame()));
-
-//     const [message,setMessage]=useState(`Next Move ${game.currentPlayer}`)
-
-//     const [timers,setTimers]=useState({X:0,Y:0});
-
-//     const gameState=(game)=>{
-//         return {
-//             ...game,
-//            isOver: game.isOver,
-//            winningPlayers: game.winningPlayers,
-//            isStalemate: game.isStalemate,          
-//         }
-//     };
-
-//     const onMove = (cell)=>{
-//         const result = game.move(cell);
-//         if(!result) 
-//             return;
-//         updateGame(gameState());
-//         if(game.winner){
-//             onGameResult({winner:game.winningPlayer});
-//             setMessage(`'${game.winningPlayer}' Wins`)
-//         } else if(game.isOver){
-//             onGameResult({winner:null, timers});
-//             setMessage(`Stalemate`)
-//         }
-
-//     }
-
-//     const handlePlay=()=>{
-//         this.setState({running:true,reset:false});
-//         this.timers.O.current.start();
-//         this.timers.X.current.start();
-//     }
-
-//     return null;
-
-// }
-
-
 
 export class Game extends React.Component {
 
@@ -66,7 +21,7 @@ export class Game extends React.Component {
         //console.log('this.state',this.state);
         this.state.running=false;
         this.state.reset=false;
-        
+
         this.timers={
             O: React.createRef(),
             X: React.createRef()
@@ -85,8 +40,7 @@ export class Game extends React.Component {
             timers:{
                 O:0,
                 X:0,
-            },
-            
+            }
             
         }; 
         
@@ -111,7 +65,7 @@ export class Game extends React.Component {
         });
 
         if(this.game.isOver){
-            this.props.onGameResult({winner:this.game.winningPlayer,timers:this.state.timers});
+            this.props.onGameResult(this.game.winningPlayer);
             this.setState({running:false});
         }
 
