@@ -1,6 +1,7 @@
 import React from 'react';
 import { User } from '../services/user';
 import { InMemoryUserService } from '../services/in-memory-user.service';
+import { useMessageContext } from './message.context';
 
 
 
@@ -8,14 +9,14 @@ const userContext= React.createContext<any>(null);
 
 export const useUserContext=()=> React.useContext(userContext);
 
-const userService  =new InMemoryUserService();
+type ContextUser=User|null;
 
-const userReducer= (user:User,action:any)=>{
+const userReducer= (user:ContextUser=null,action:any):ContextUser=>{
 
-    console.log('action',action);
+    //console.log('action',action);
     switch (action.type) {
         case 'LOGIN':
-            return {...action.payload};
+            return {...action.payload}
         case 'LOGOUT':
             return null;
         default:
@@ -24,32 +25,55 @@ const userReducer= (user:User,action:any)=>{
  
 }
 
-//action creator
-const loginUser = async (loginInfo:any)=>{
-    var user=await userService.login(loginInfo.email, loginInfo.password);
-    if(user)
-        return {type:"LOGIN", payload:user};
-    else
-        return {type:"ERROR", payload:"Invalid Credentials"};
-}
-
-
-  //1. call an action creator
-   //2. wait for it to finish
-   //3. dispath the value returned. 
-
-
 
 
 export const UserProvider=({children}:any)=>{
 
-    const [user,dispatch] = React.useReducer(userReducer,null);
+    const [user,dispatch] = React.useReducer(userReducer, null);
+    const {setMessage,message} = useMessageContext();
 
-    
+    const userService = new InMemoryUserService();
+    //action creator
+    const loginUser = async (loginInfo:any)=>{
+        try{
+
+            setMessage("Validating...","INFO")
+            var user=await userService.login(loginInfo.email, loginInfo.password);
+            
+            setMessage(`Welcome ${user.name}`, "SUCCESS");
+            dispatch( {type:"LOGIN", payload:user});
+        }
+        catch(error:any){
+
+           setMessage("Invalid Credentials", "ERROR");
+        }
+        
+    }
+
+    const registerUser = async (user:User)=>{
+        try{
+
+            setMessage("Validating...","INFO")
+            const result=await userService.register(user);
+            
+            setMessage(`Welcome ${user.name}`, "SUCCESS");
+            dispatch( {type:"LOGIN", payload:result});
+        }
+        catch(error:any){
+
+           setMessage(error.message, "ERROR");
+        }
+        
+    }
  
 
 
-    const contextData={user,dispatch,userService, loginUser };
+    const contextData={
+        user,
+        message,
+        loginUser,
+        registerUser
+    };
 
     return <userContext.Provider value={contextData}>
         {children}

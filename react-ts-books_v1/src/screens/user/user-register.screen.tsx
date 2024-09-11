@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useUserContext } from '../../contexts/user.context';
-import { useMessageContext } from '../../contexts/message.context';
-import { Message } from '../../components/message.component';
 
 
 export interface UserRegistrationScreenProps {
@@ -12,14 +9,11 @@ export interface UserRegistrationScreenProps {
 
 export const UserRegistrationScreen = (props: UserRegistrationScreenProps) => {
 
-    const {user, registerUser} = useUserContext();
-
-
 
     return (
 
         <div className='UserRegistrationScreenComponent'>
-            <Message/>
+
             <h2>User Registration</h2>
             <div className="row">
                 <div className="col-6">

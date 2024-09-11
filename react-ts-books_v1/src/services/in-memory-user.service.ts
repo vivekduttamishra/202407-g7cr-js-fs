@@ -24,16 +24,4 @@ export class InMemoryUserService {
             throw new Error('Invalid Credentials');
     }
 
-    async register(user:User){
-        await delay(3000);
-        var existingUser= users.find(u=> u.email === user.email);
-        if(existingUser)
-            throw new Error('Email already exists');
-
-        users.push(user);
-        let result={...user};
-        result.password="";
-        return result;
-    }
-
 }
