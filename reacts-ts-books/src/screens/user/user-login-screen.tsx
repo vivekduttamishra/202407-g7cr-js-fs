@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { withFieldset } from '../../hocs/with-fieldset';
 import { LabeledInput } from '../../components/input.component';
 import { useUserContext } from '../../contexts/user.context';
-import { useNavigate } from 'react-router-dom';
-import { useMessageContext } from '../../contexts/message.context';
-import { Message } from '../../components/message.component';
+import { Status } from '../../components/status.component';
 
 
 export interface UserLoginScreenProps {
@@ -32,7 +30,6 @@ let UserLoginScreen = (props: UserLoginScreenProps) => {
 
     console.log('In Login Component')
     console.log('user',user);
-    console.log('message',message);
 
     
     const handleLogin=()=>{
@@ -64,7 +61,7 @@ let UserLoginScreen = (props: UserLoginScreenProps) => {
 
         <div className='UserLoginScreenComponent'>
             
-                <Message/>
+                <Status/>
                 <div className="row">
                     <div className="col-6">
                         

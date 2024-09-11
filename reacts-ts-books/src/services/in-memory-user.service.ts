@@ -11,7 +11,7 @@ const users:User[]=[
 
 export class InMemoryUserService {
 
-    async login(email:string, password:string){
+    login=async(email:string, password:string)=>{
         await delay(2000);
         const user= users.find(u=> u.email === email && u.password === password);
         if(user){
@@ -24,7 +24,7 @@ export class InMemoryUserService {
             throw new Error('Invalid Credentials');
     }
 
-    async register(user:User){
+    register= async(user:User)=>{
         await delay(3000);
         var existingUser= users.find(u=> u.email === user.email);
         if(existingUser)

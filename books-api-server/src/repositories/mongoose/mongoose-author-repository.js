@@ -7,7 +7,7 @@ class MongooseAuthorRepository{
 
     getAllAuthors=async()=>{
 
-       return  await Author.find({},{_id:0,id:1,name:1,photo:1});
+       return  await Author.find({},{_id:0,id:1,name:1,photo:1,biography:1});
 
     }
     getAuthorById=async(id)=>{

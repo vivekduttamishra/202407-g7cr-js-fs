@@ -8,6 +8,9 @@ import { NotFound } from '../../components/not-found.component';
 import { AuthorDetails } from '../../components/author-details.component';
 import { InMemoryAuthorService } from '../../services/in-memory-author.service';
 import { useAuthorContext } from '../../contexts/author.context';
+import { useStatusContext } from '../../contexts/status.context';
+import { LoadingAnimation } from '../../components/loading-animation.component';
+import { Status } from '../../components/status.component';
 
 
 export interface AuthorDetailsScreenProps {
@@ -22,19 +25,21 @@ export const AuthorDetailsScreen = (props: AuthorDetailsScreenProps) => {
 
     //const authorService = new InMemoryAuthorService();
 
-    const authorService = useAuthorContext();
+    const {selectedAuthor,getAuthorById} = useAuthorContext();
+    const {status}= useStatusContext();
     
    
     let { id } = useParams();
 
-    let author = authorService.getAuthorById(id!);
-
+    useEffect(()=>{
+        getAuthorById(id);
+    },[id]);
 
 
     return <AuthorDetails 
-                    author={author}
-                    visibility={author!==undefined}
-                    otherwise={<NotFound message={`Invalid Author Id ${id}`} />}
+                    author={selectedAuthor}
+                    visibility={status.type==='SUCCESS'}  
+                    otherwise={<Status/>}                  
             />;
 
 
