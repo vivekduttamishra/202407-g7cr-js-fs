@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { AuthorListScreen } from "./screens/authors/author-list.screen";
+import  AuthorListScreen  from "./screens/authors/author-list.screen";
 import { AuthorDetailsScreen } from "./screens/authors/author-details.screen";
 import { AuthorAddScreen } from "./screens/authors/author-add.screen";
 import { BookListScreen } from "./screens/books/book-list.screen";

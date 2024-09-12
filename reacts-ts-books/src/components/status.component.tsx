@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from'react';
 import { LoadingAnimation } from './loading-animation.component';
-import { useStatusContext } from '../contexts/status.context';
+import { useStatusContext } from '../reducers/status.context';
 
 
 export const Status = () => {

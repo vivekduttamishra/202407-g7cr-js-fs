@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useUserContext } from '../../contexts/user.context';
-import { useStatusContext } from '../../contexts/status.context';
+import { useUserContext } from '../../reducers/user.context';
+import { useStatusContext } from '../../reducers/status.context';
 import { Status } from '../../components/status.component';
 import { User } from '../../services/user';
 import { LabeledInput } from '../../components/input.component';

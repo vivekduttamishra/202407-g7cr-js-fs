@@ -7,8 +7,8 @@ import AuthorInfo from '../../components/author-info.component';
 import { NotFound } from '../../components/not-found.component';
 import { AuthorDetails } from '../../components/author-details.component';
 import { InMemoryAuthorService } from '../../services/in-memory-author.service';
-import { useAuthorContext } from '../../contexts/author.context';
-import { useStatusContext } from '../../contexts/status.context';
+import { useAuthorContext } from '../../reducers/authors';
+import { useStatusContext } from '../../reducers/status.context';
 import { LoadingAnimation } from '../../components/loading-animation.component';
 import { Status } from '../../components/status.component';
 

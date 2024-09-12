@@ -31,3 +31,22 @@ export function action( serviceFunction:(...params:any[])=>any,
         }    
     }
 }
+
+
+export const reduxAction = (fn: any, actionName: string) => {
+    const _inner = async (...params: any[]) => {
+        
+        try {
+            let result: any = fn(...params);
+            if (result instanceof Promise) {
+                result = await result;
+            }
+            return { type: actionName, payload: result };
+
+        } catch (err) {
+            return { type: `ERROR_${actionName}`, payload: err };
+        }
+    }
+
+    return _inner;
+}

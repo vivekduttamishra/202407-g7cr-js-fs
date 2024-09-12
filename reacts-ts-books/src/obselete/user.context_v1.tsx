@@ -1,7 +1,7 @@
 import React from 'react';
 import { User } from '../services/user';
 import { InMemoryUserService } from '../services/in-memory-user.service';
-import { useStatusContext } from '../contexts//status.context';
+import { useStatusContext } from '../reducers/status.context';
 
 
 

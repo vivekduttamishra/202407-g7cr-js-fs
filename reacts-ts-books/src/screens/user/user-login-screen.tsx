@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { withFieldset } from '../../hocs/with-fieldset';
 import { LabeledInput } from '../../components/input.component';
-import { useUserContext } from '../../contexts/user.context';
+import { useUserContext } from '../../reducers/user.context';
 import { Status } from '../../components/status.component';
+import { useQueryString } from '../../utils/use-qs';
+import { useNavigate } from 'react-router-dom';
+import { useStatusContext } from '../../reducers/status.context';
 
 
 export interface UserLoginScreenProps {
@@ -12,6 +15,23 @@ export interface UserLoginScreenProps {
 
 
 let UserLoginScreen = (props: UserLoginScreenProps) => {
+
+
+    const qs= useQueryString();
+    const navigate =useNavigate();
+    const {status}=useStatusContext();
+    
+
+    useEffect(()=>{
+        if(status.type==='SUCCESS' &&  status.action==='LOGIN'){
+            if(qs['returnurl'])
+                navigate(qs['returnurl']);
+            else
+                navigate('/');
+        }
+
+    },[qs, status, navigate])
+
 
     const [loginInfo,setLoginInfo]=useState({
         email:"vivek@conceptarchitect.in",

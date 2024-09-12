@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from'react';
-import { useUserContext } from '../contexts/user.context';
+import { useUserContext } from '../reducers/user.context';
 
 
 export interface AuthenticatedProps{
