@@ -39,6 +39,11 @@ class Injector{
         return this;
     }
 
+    registerObject=(key, object)=>{
+        this.container[key]={scrope:'singleton',instance:object};
+        return this;
+    }
+
 
     _lookup(key){
         var metaInfo=this.container[key];
@@ -61,7 +66,10 @@ class Injector{
         if(!metaInfo)
             throw new Error(`No registered '${key}' in the container`);
 
-        var object = this._createObject(metaInfo);
+        var object=metaInfo.instance?? this._createObject(metaInfo);
+        if(metaInfo.scope==='singleton' && !metaInfo.instance)
+            metaInfo.instance=object;
+        
         console.log(`return  for ${key}: ${JSON.stringify(object)}`);
         return object;
     }
@@ -99,7 +107,7 @@ class Injector{
     _extractParameters(str,index){
         let index2=str.indexOf("(",index);
         var index3=str.indexOf(")", index2);
-        return str.substring(index2+1,index3).split(",")
+        return str.substring(index2+1,index3).split(",").map(key=>key.trim());
     }
     
     _getDependencies(fn){

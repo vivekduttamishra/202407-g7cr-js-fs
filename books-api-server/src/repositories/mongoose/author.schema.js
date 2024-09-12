@@ -15,6 +15,13 @@ authorSchema.pre('save',function(){
     }
 });
 
+// authorSchema.virtual('books', {
+//     ref: 'Book',        // The model to use
+//     localField: 'id',  // The field in Book
+//     foreignField: 'authorId',  // The field in Author
+//    // justOne: true        // Use `justOne` if you want to get a single document instead of an array
+// });
+
 /**
  * Parameter
  * 1. Model Name: Identifies the current inside mongoose framework.

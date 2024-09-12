@@ -19,8 +19,8 @@ class MongooseAuthorRepository{
     addAuthor=async(author)=>{
 
         var newAuthor = new Author(author);
-        
-        var dbAuthor= await newAuthor.save();
+       
+        var dbAuthor= await newAuthor.save(); 
         return dbAuthor;
 
     }

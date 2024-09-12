@@ -1,7 +1,8 @@
 const ValidationException = require('./validation-exception');
 const NotFoundException = require('./not-found-exception');
-
-
+const InvalidCredentialError = require('./invalid-credentials-error');
+const tokenService = require('./token-service');
+const { response } = require('express');
 const methodStatusMap = {
     GET: 200,
     POST: 201,
@@ -14,6 +15,7 @@ const exceptionMapper = {
     ValidationException: (e) => new HttpErrorResponse(400, e.errors),
     NotFoundException: (e) => new HttpErrorResponse(404, e.errors),
     ValidationError: (e) => new HttpErrorResponse(400, e.errors),
+    InvalidCredentialsError: (e) => new HttpErrorResponse(401, e.errors),
 }
 
 class Response {
@@ -96,10 +98,68 @@ function nullIs404(request, response, next) {
 }
 
 
+async function tokenChecker(request,response,next){
+    const authHeader = request.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
+    console.log('authHeader',authHeader);
+    console.log('token',token);
+    
+    
+    if(token){
+        try{
+            request.user= await tokenService.deTokenize(token);
+            console.log('request.user',request.user);
+            
+        }catch(err){
+            //It's ok not to have a token
+            console.log('err.message',err.message);
+            
+        }
+    }
+
+    next();
+}
+
+
+const authenticate = (req, res, next) => {
+    console.log('in authenticate req.user',req.user);
+    
+    
+    if(req.user){
+        next();
+    }else{
+        res
+            .status(401)
+            .send({status:401, message: 'Unauthorized', path:req.originalUrl })
+    }
+};
+
+const authorize=(...roles)=>(req,res, next)=>{
+
+    const user=req.user;
+    if(user){
+        for(let userRole of user.roles){
+            if(roles.includes(userRole)){
+                next();
+                return;
+            }
+        }
+    }
+    response
+        .status(403)
+        .send({status:403, message:'Not Authorized'});
+}
+
+
+
+
 module.exports = {
     handleRequest,
     Response,
     ValidationException,
     NotFoundException,
+    authenticate,
+    authorize,
+    tokenChecker,
     nullIs404
 };

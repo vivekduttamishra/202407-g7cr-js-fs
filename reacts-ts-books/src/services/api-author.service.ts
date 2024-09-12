@@ -9,8 +9,16 @@ export class ApiAuthorService{
     
 
     getAllAuthors=async ()=>{
-        const data = await axios.get(url);
-        return data.data;
+        try{
+            
+            const data = await axios.get(url);
+            console.log('data',data);
+            
+            return data.data;
+        }catch(error){
+            console.log('error',error);
+            throw error;
+        }
     }
 
     getAuthorById=async (id?:string)=>{

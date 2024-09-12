@@ -4,6 +4,7 @@ import { AuthorCard } from '../../components/author-card.component';
 import { useAuthorContext } from '../../contexts/author.context';
 import { LoadingAnimation } from '../../components/loading-animation.component';
 import { useStatusContext } from '../../contexts/status.context';
+import { Status } from '../../components/status.component';
 
 
 export interface AuthorListScreenProps {
@@ -17,12 +18,16 @@ export const AuthorListScreen = () => {
 
     const {authors, getAllAuthors}= useAuthorContext();
     const {status}=useStatusContext();
+
+    console.log('status',status);
+    
     
     //get all authors
     useEffect(getAllAuthors,[]);
 
-    if(status.type ==='LOADING')
-        return <LoadingAnimation />;
+    if(status.type!=='SUCCESS'){
+        return <Status/>
+    }
 
     return (
 
