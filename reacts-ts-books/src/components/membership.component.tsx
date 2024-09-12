@@ -16,17 +16,18 @@ export interface UserMenuProps{
 const UserMenu = ({ user }:UserMenuProps) => {
     //console.log('in userMenu', user);
 
-    const {dispatch} = useUserContext();
+    const {logoutUser} = useUserContext();
     const navigate = useNavigate();
 
     const handleLogout=()=>{
-        dispatch({type:"LOGOUT"});
-        //navigate('/');
+        logoutUser();
     }
+    
     
     return (<ul className="navbar-nav mb-2 mb-lg-0 d-flex">
         <li className="nav-item dropdown ">
             <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img className='avatar-image' src={user.photo||'/images/guest.png'} alt={user.name} />
                 {user.name}
             </Link>
             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -49,6 +50,7 @@ export const GuestMenu = () => {
     return (<ul className="navbar-nav mb-2 mb-lg-0 d-flex">
         <li className="nav-item dropdown ">
             <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img className='avatar-image' src='/images/guest.png' alt='user' />
                 Guest
             </Link>
             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">

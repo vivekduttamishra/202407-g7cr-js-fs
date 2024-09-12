@@ -2,6 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/js/bootstrap'
 import { Link } from 'react-router-dom';
 import { Membership } from './membership.component';
+import { Authenticated } from './authenticated.component';
 
 
 
@@ -26,15 +27,19 @@ export const NavBar = ({ title}: NavbarProps) => {
                         <li className="nav-item">
                             <Link className="nav-link active" aria-current="page" to='/authors'>Authors</Link>
                         </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/author/add" >Add Author</Link>
-                        </li>
+                        <Authenticated>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/author/add" >Add Author</Link>
+                            </li>
+                        </Authenticated>
                         <li className="nav-item">
                             <Link className="nav-link" aria-current="page" to="/books">Books</Link>
                         </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/book/add">Add Book</Link>
-                        </li>
+                        <Authenticated>                            
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/book/add">Add Book</Link>
+                            </li>
+                        </Authenticated>
 
 
                     </ul>

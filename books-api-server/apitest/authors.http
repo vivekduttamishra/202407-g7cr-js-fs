@@ -49,10 +49,13 @@ DELETE http://localhost:8000/api/authors/invalid-id
 
 
 ### Create author alexandre-dumas
+
 POST http://localhost:8000/api/authors
 CONTENT-TYPE: application/json
+Authorization: BEARER eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZpdmVrQGNvbmNlcHRhcmNoaXRlY3QuaW4iLCJyb2xlcyI6WyJVU0VSIl0sImlhdCI6MTcyNjEzMDE0NCwiZXhwIjoxNzI2MTMzNzQ0fQ.eXFd7v0t4JzyVY3v_1ckzZMG0JGkUi4rMc1n0wo69qo
 
 {
+    "id":"t5",
     "name":"Alexandre Dumas",
     "biography":"One of the greatest classic author of French and English. His book The Count of Monte Cristo is specially famous.",
     "photo":"dumas.png"

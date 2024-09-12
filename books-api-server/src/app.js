@@ -2,7 +2,11 @@
 let express = require('express');
 const cors = require('cors');
 var toJson = require('./utils/request-json');
+
+var {tokenInspector} = require('./utils/token-service');
+
 require('./dependencies')(); //run the only function in this file.
+
 
 
 //var  db = require('./repositories/mongoose/connection'); //
@@ -23,7 +27,8 @@ async function createApp() {
     let app = express();
 
     app.use(cors());//enable CORS for all origins and headers.
-   
+    
+    app.use(tokenInspector);
 
     app.use(express.json());
 

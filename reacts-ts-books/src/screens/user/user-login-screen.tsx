@@ -15,7 +15,7 @@ let UserLoginScreen = (props: UserLoginScreenProps) => {
 
     const [loginInfo,setLoginInfo]=useState({
         email:"vivek@conceptarchitect.in",
-        password:"p@ss"
+        password:"p@ss#1"
     });
     const updateLoginInfo=(value:string,id:string)=>{
         setLoginInfo({...loginInfo,[id]:value})

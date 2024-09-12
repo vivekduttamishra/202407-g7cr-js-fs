@@ -1,5 +1,6 @@
 let express = require('express');
 const {handleRequest} = require('../utils/http-handler');
+const {authenticate} =require('../utils/token-service');
 
 
 //let authorRepository= require('../repositories/in-memory/in-memory-author-repository');
@@ -27,7 +28,7 @@ var authors = express.Router();
 //Root:   /api/authors/
 authors.route("/")
     .get(handleRequest(authorController.getAllAuthors))
-    .post(handleRequest(authorController.addAuthor));
+    .post(authenticate, handleRequest(authorController.addAuthor));
 
 
 authors.route("/:authorId")

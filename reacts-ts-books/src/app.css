@@ -64,3 +64,11 @@
   .LoadingAnimationComponent img{
     width:120px;
   }
+
+
+  .avatar-image{
+      width:50px;
+      margin-right:5px;
+      border: 2px solid black;
+      border-radius:50%;  
+  }

@@ -77,6 +77,7 @@ export const AuthorProvider =({children}:any)=>{
     const actions={
         getAllAuthors: action(service.getAllAuthors,dispatch,setStatus,"AUTHOR_LIST"),
         getAuthorById: action(service.getAuthorById,dispatch,setStatus,"AUTHOR_SELECT"),
+        addAuthor: action(service.addAuthor,dispatch,setStatus,"AUTHOR_ADD")
     }
 
 

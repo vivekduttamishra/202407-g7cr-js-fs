@@ -1,5 +1,6 @@
 import React from 'react';
 import { withVisibility } from '../hocs/with-visibility';
+import { Authenticated } from './authenticated.component';
 
 interface AuthorDetailsProps{
     author?: any,
@@ -14,13 +15,21 @@ let _AuthorDetails=({author,onAuthorDelete}:AuthorDetailsProps)=>{
     return (
         <div>
            <h2>{author.name}</h2>
-           {
-            onAuthorDelete &&
-            <button
-                onClick={()=>onAuthorDelete(author.id)}
-                className='btn btn-danger'
-            >Delete</button>
-           }
+           <div className='row'>
+                <div className='col col-md-4'>
+                    <img className='author-image' src={author.photo} alt={author.name}/>
+                    <p/>
+                    <Authenticated roles={['moderator','admin']}>
+                        <button className="btn btn-danger">Delete</button>
+                    </Authenticated>
+                </div>
+                <div className='col col-md-8'>
+                    <h3>Biography</h3>
+                    <p>{author.tags?.join(',')}</p>
+                    <hr/>
+                    <p>{author.biography}</p>
+                </div>
+           </div>
         </div>
     )
 }

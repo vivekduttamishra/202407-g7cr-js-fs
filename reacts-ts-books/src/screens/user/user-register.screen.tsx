@@ -26,12 +26,7 @@ export const UserRegistrationScreen = (props: UserRegistrationScreenProps) => {
     const {status: message} = useStatusContext();
     const navigate = useNavigate();
 
-    useEffect(()=>{
-
-        if(message.type==='SUCCESS')
-            navigate('/');
-
-    },[navigate,message.type]);
+   
 
     function updateUserInfo(value:any, id:string){
         setUser({
