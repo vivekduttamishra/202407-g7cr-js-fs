@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useUserContext } from '../reducers/user.context';
+//import { useUserContext } from '../reducers/user.context';
 import { User } from '../services/user';
 
 
@@ -16,11 +16,11 @@ export interface UserMenuProps{
 const UserMenu = ({ user }:UserMenuProps) => {
     //console.log('in userMenu', user);
 
-    const {logoutUser} = useUserContext();
+    //const {logoutUser} = useUserContext();
     const navigate = useNavigate();
 
     const handleLogout=()=>{
-        logoutUser();
+        //logoutUser();
     }
     
     
@@ -64,8 +64,9 @@ export const GuestMenu = () => {
 
 export const Membership = (props: MembershipProps) => {
 
-    let { user } = useUserContext();
+    //let { user } = useUserContext();
     //console.log('in membership', user);
+    const user=null;
     if(user)
         return <UserMenu user={user} />
     else

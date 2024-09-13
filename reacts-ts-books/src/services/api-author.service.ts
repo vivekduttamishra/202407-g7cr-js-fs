@@ -10,7 +10,7 @@ export class ApiAuthorService {
 
     getAllAuthors = async () => {
         try {
-
+            
             const data = await axios.get(url);
             console.log('data', data);
 
@@ -46,10 +46,10 @@ export class ApiAuthorService {
     }
 
     removeAuthor = async (id: string) => {
-
+        await axios.delete(`${url}/${id}`);
     }
 
     updateAuthor = async (id: string, author: Author) => {
-
+        await axios.put(`${url}/${id}`,author);
     }
 }

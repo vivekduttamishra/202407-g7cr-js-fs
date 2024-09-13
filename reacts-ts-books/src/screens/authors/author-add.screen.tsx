@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { LabeledInput, TextArea } from '../../components/input.component';
 import { Author } from '../../services/author';
-import { useAuthorContext } from '../../reducers/authors';
-import { useStatusContext } from '../../reducers/status.context';
 import { Status } from '../../components/status.component';
 import { useNavigate } from 'react-router-dom';
 import UserLoginScreen from '../user/user-login-screen';
@@ -26,21 +24,21 @@ export const _AuthorAddScreen = (props: AuthorAddScreenProps) => {
 
     const [author,setAuthor]=useState(dummyAuthor);
 
-    const {addAuthor} = useAuthorContext();
-    const {status,setStatus}=useStatusContext();
+    // const {addAuthor} = useAuthorContext();
+    // const {status,setStatus}=useStatusContext();
     const navigate = useNavigate();
 
     useEffect(()=>{
-        setStatus("","READY","AUTHOR_ADD");
+       // setStatus("","READY","AUTHOR_ADD");
     },[]);
 
-    useEffect(()=>{
-        if(status.type==='SUCCESS' && status.action==='AUTHOR_ADD'){
-            navigate('/authors');            
-        }
+    // useEffect(()=>{
+    //     if(status.type==='SUCCESS' && status.action==='AUTHOR_ADD'){
+    //         navigate('/authors');            
+    //     }
 
 
-    },[status,navigate]);
+    // },[status,navigate]);
 
     const handleAuthorUpdate=(value:any, id:string)=>{
         if(id==='tags'){
@@ -55,7 +53,7 @@ export const _AuthorAddScreen = (props: AuthorAddScreenProps) => {
     const handleSave=async ()=>{
         try{
             
-            await addAuthor(author);
+            //await addAuthor(author);
             
         }catch(err){
             //will automatically show error

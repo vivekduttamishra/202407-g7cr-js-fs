@@ -1,5 +1,4 @@
 import React from 'react';
-import { useStatusContext } from './status.context';
 import { reduxAction } from '../utils/action-creator';
 import { ApiUserService } from '../services/api-user.service';
 
@@ -23,13 +22,12 @@ export const userReducer = (user: any = null, action: any) => {
 
 const userService = new ApiUserService();
 
-export const userActions = {
+export const loginUser=(loginInfo:any)=> ({type: 'LOGIN', payload: userService.login(loginInfo.email,loginInfo.password)});
+export const registerUser=(user:any)=> ({type: 'REGISTER', payload: userService.register(user)});
+export const logoutUser=()=> ({type: 'LOGOUT', payload: userService.logout()});
+export const getLoggedInUser=()=> ({type: 'LOGIN', payload: userService.getLoggedInUser()});
 
-    loginUser: reduxAction((loginInfo: any) => userService.login(loginInfo.email, loginInfo.password),  "LOGIN"),
-    registerUser: reduxAction(userService.register,"REGISTER"),
-    logoutUser: reduxAction(userService.logout,"LOGOUT"),
-    getLoggedInUser: reduxAction(() => userService.getLoggedInUser, "LOGIN")
-}
+
 
 
 

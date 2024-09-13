@@ -7,10 +7,13 @@ import AuthorInfo from '../../components/author-info.component';
 import { NotFound } from '../../components/not-found.component';
 import { AuthorDetails } from '../../components/author-details.component';
 import { InMemoryAuthorService } from '../../services/in-memory-author.service';
-import { useAuthorContext } from '../../reducers/authors';
-import { useStatusContext } from '../../reducers/status.context';
+//import { useAuthorContext } from '../../reducers/authors';
+//import { useStatusContext } from '../../reducers/status.context';
 import { LoadingAnimation } from '../../components/loading-animation.component';
 import { Status } from '../../components/status.component';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAuthorById } from '../../reducers/authors.reducer';
+import { Async } from '../../components/async-component';
 
 
 export interface AuthorDetailsScreenProps {
@@ -25,22 +28,31 @@ export const AuthorDetailsScreen = (props: AuthorDetailsScreenProps) => {
 
     //const authorService = new InMemoryAuthorService();
 
-    const {selectedAuthor,getAuthorById} = useAuthorContext();
-    const {status}= useStatusContext();
+    // const {selectedAuthor,getAuthorById} = useAuthorContext();
+    // const {status}= useStatusContext();
     
    
     let { id } = useParams();
+    let author= useSelector((s:any)=>s.author);
+    let dispatch = useDispatch();
 
     useEffect(()=>{
-        getAuthorById(id);
-    },[id]);
+        dispatch(getAuthorById(id!))
+    },[id,dispatch]); 
 
+    console.log('AuthorDetailsScreen:author',author);
+    
+    return <Async actionName='AUTHOR_SELECT' >
+        <AuthorDetails visibility={true}
+            author={author}
+        />
+    </Async>
 
-    return <AuthorDetails 
-                    author={selectedAuthor}
-                    visibility={status.type==='SUCCESS'}  
-                    otherwise={<Status/>}                  
-            />;
+    // return <AuthorDetails 
+    //                 author={selectedAuthor}
+    //                 visibility={status.type==='SUCCESS'}  
+    //                 otherwise={<Status/>}                  
+    //         />;
 
 
     // if(!author)

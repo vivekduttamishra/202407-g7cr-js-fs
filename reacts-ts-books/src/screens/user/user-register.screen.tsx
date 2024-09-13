@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useUserContext } from '../../reducers/user.context';
-import { useStatusContext } from '../../reducers/status.context';
+
 import { Status } from '../../components/status.component';
 import { User } from '../../services/user';
 import { LabeledInput } from '../../components/input.component';
@@ -23,7 +22,7 @@ export const UserRegistrationScreen = (props: UserRegistrationScreenProps) => {
         roles:["user"],
     });
 
-    const {status: message} = useStatusContext();
+    //const {status: message} = useStatusContext();
     const navigate = useNavigate();
 
    
@@ -36,7 +35,7 @@ export const UserRegistrationScreen = (props: UserRegistrationScreenProps) => {
     }
 
 
-    const { registerUser} = useUserContext();
+    //const { registerUser} = useUserContext();
 
 
 
@@ -72,7 +71,7 @@ export const UserRegistrationScreen = (props: UserRegistrationScreenProps) => {
                      
                     <button 
                     className='btn btn-primary form-control'
-                    onClick={()=>registerUser(user)}
+                    
                     >
                         Register
                     </button>

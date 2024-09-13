@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { withFieldset } from '../../hocs/with-fieldset';
 import { LabeledInput } from '../../components/input.component';
-import { useUserContext } from '../../reducers/user.context';
 import { Status } from '../../components/status.component';
 import { useQueryString } from '../../utils/use-qs';
 import { useNavigate } from 'react-router-dom';
-import { useStatusContext } from '../../reducers/status.context';
 
 
 export interface UserLoginScreenProps {
@@ -19,24 +17,25 @@ let UserLoginScreen = (props: UserLoginScreenProps) => {
 
     const qs= useQueryString();
     const navigate =useNavigate();
-    const {status}=useStatusContext();
+    //const {status}=useStatusContext();
     
 
-    useEffect(()=>{
-        if(status.type==='SUCCESS' &&  status.action==='LOGIN'){
-            if(qs['returnurl'])
-                navigate(qs['returnurl']);
-            else
-                navigate('/');
-        }
+    // useEffect(()=>{
+    //     // if(status.type==='SUCCESS' &&  status.action==='LOGIN'){
+    //     //     if(qs['returnurl'])
+    //     //         navigate(qs['returnurl']);
+    //     //     else
+    //     //         navigate('/');
+    //     // }
 
-    },[qs, status, navigate])
+    // },[qs, status, navigate])
 
 
     const [loginInfo,setLoginInfo]=useState({
         email:"vivek@conceptarchitect.in",
         password:"p@ss#1"
     });
+    
     const updateLoginInfo=(value:string,id:string)=>{
         setLoginInfo({...loginInfo,[id]:value})
     }
@@ -46,14 +45,14 @@ let UserLoginScreen = (props: UserLoginScreenProps) => {
     // const [statusMessage,setStatusMessage]=useState("");
     
     
-    const{loginUser,user} = useUserContext();
+    //const{loginUser,user} = useUserContext();
 
     console.log('In Login Component')
-    console.log('user',user);
+    //console.log('user',user);
 
     
     const handleLogin=()=>{
-        loginUser(loginInfo);   
+       // loginUser(loginInfo);   
     }
     
     

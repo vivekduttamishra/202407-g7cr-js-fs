@@ -1,11 +1,11 @@
 import React,{useState, useEffect} from'react';
 import { LoadingAnimation } from './loading-animation.component';
-import { useStatusContext } from '../reducers/status.context';
+//import { useStatusContext } from '../reducers/status.context';
 
 
 export const Status = () => {
 
-    const {status} =useStatusContext();
+    //const {status} =useStatusContext();
     const colors:any={
         "INFO":"text-primary",
         "SUCCESS":"text-success",
@@ -13,14 +13,16 @@ export const Status = () => {
         "LOADING":"text-secondary"
     }
 
-   if(status.type==="LOADING")
-        return <LoadingAnimation/>;
+//    if(status.type==="LOADING")
+//         return <LoadingAnimation/>;
 
-    return (
+    // return (
 
-        <div className={colors[status.type]}>
-            <h4>{status.text}</h4>            
-        </div>
-    );
+    //     <div className={colors[status.type]}>
+    //         <h4>{status.text}</h4>            
+    //     </div>
+    // );
+
+    return <div>status</div>
 
 }
