@@ -1,0 +1,40 @@
+
+### Get All Authors
+GET http://localhost:5000/api/authors
+
+
+
+### Add New Author
+POST http://localhost:5000/api/authors
+Content-Type: application/json
+
+{
+    "id":"dumas",
+    "name":"Alexandre Dumas",
+    "biography":"One of the greatest classic french Author",
+    "photo":"dumas.png"
+}
+
+### Update an Author
+PUT http://localhost:5000/api/authors/vivek-dutta-mishra
+Content-Type: application/json
+
+{
+    "id":"vivek-dutta-mishra",
+    "biography":"Author the Last Epic and Manas"    
+}
+
+
+
+### Get Author By Id
+GET http://localhost:5000/api/authors/vivek-dutta-mishra
+
+
+
+### Get Books by  Author
+GET http://localhost:5000/api/authors/vivek-dutta-mishra/books
+
+
+### Delete Author By Id
+
+DELETE http://localhost:5000/api/authors/vivek-dutta-mishra
