@@ -1,3 +1,4 @@
+import { AppException } from "./app-exception";
 
 
 export class InvalidCredentialsError extends AppException{

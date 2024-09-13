@@ -1,7 +1,11 @@
-import { Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Get, Inject, Post } from "@nestjs/common";
+import { User } from "../entities/user";
+import { SimpleUserService } from "../services/simple-user-service";
 
 @Controller('/api/users')
 export class UserController{
+
+    constructor(@Inject('userService') private userService: SimpleUserService){}
 
     @Get()
     async getUsers(){
@@ -10,17 +14,19 @@ export class UserController{
     }
 
     @Post()
-    async createUser(){
-        return `User created successfully`;
+    async register(@Body() user:User){
+        return await this.userService.register(user);
     }
 
 }
 
 @Controller()
 export class TokenController{
+    constructor(@Inject('userService') private userService: SimpleUserService){}
     @Post('/api/token')
-    async loginToken(){
-        return `Login token created successfully`;
+    async loginToken(@Body() user:Partial<User>){
+
+        return await this.userService.login(user.email!,user.password!);
     }
 
 }

@@ -1,25 +1,28 @@
-import { Body, Controller, Get, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Inject, Param, Post, Put } from "@nestjs/common";
+import { AuthorService } from "../services/author-service";
 
 @Controller("/api/authors")
 export class AuthorController{
+
+   
+    constructor(@Inject("authorService") private authorService: AuthorService){
+       
+    }
     
     @Get()
     async getAllAuthors() {
-        return ['John Doe', 'Jane Doe'];
+        return await this.authorService.getAllAuthors();
     }
 
     @Post()
     async addAuthor(@Body() author:any) {
-        return {
-            status:'success',
-            author
-        };
+        return await this.authorService.addAuthor(author);
     }
 
     // /api/author/vivek
     @Get(':id')
     async getAuthorById(@Param('id') id: string) {
-        return `Author with ID: ${id}`;
+        return await this.authorService.getAuthorById(id)
     }
 
     @Get(':id/books')
@@ -29,11 +32,12 @@ export class AuthorController{
 
     @Put(":id")
     async updateAuthor(@Param('id') id: string, @Body() author: any) {
-        return {
-            status:'success',
-            id,
-            author
-        }
+        return await this.authorService.updateAuthor(id,author);
+    }
+
+    @Delete(":id")
+    async removeAuthor(@Param('id') id: string) {
+        await this.authorService.removeAuthor(id);
     }
 }
 

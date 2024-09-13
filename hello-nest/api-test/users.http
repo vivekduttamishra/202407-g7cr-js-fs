@@ -10,5 +10,11 @@ POST http://localhost:5000/api/users
 
 ### Login a USER
 POST http://localhost:5000/api/token
+Content-Type: application/json
+
+{
+    "email":"john@example.com",
+    "password":"password"
+}
 
 

@@ -9,20 +9,18 @@ POST http://localhost:5000/api/authors
 Content-Type: application/json
 
 {
-    "name":"Vivek Dutta Mishra",
-    "biography":"Author of the Lost Epic series",
-    "photo":"vivek.png"
+    "name":"Alexandre Dumas",
+    "biography":"One of the greatest classic french Author",
+    "photo":"dumas.png"
 }
 
 ### Update an Author
-PUT http://localhost:5000/api/authors/vivek
+PUT http://localhost:5000/api/authors/vivek-dutta-mishra
 Content-Type: application/json
 
 {
-    "id":"vivek",
-    "name":"Vivek Dutta Mishra",
-    "biography":"Author of the Lost Epic series",
-    "photo":"vivek.png"
+    "id":"vivek-dutta-mishra",
+    "biography":"Author the Last Epic and Manas"    
 }
 
 
@@ -34,3 +32,8 @@ GET http://localhost:5000/api/authors/vivek-dutta-mishra
 
 ### Get Books by  Author
 GET http://localhost:5000/api/authors/vivek-dutta-mishra/books
+
+
+### Delete Author By Id
+
+DELETE http://localhost:5000/api/authors/vivek-dutta-mishra

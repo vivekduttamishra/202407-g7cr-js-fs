@@ -1,4 +1,4 @@
-class AppException extends Error{
+export class AppException extends Error{
     public errors: any={};
     
     constructor(message:string, errors:any){
@@ -10,4 +10,3 @@ class AppException extends Error{
     }
 }
 
-module.exports=AppException;
