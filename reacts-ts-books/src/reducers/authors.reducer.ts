@@ -1,6 +1,5 @@
 import { Author } from '../services/author';
 import { ApiAuthorService } from '../services/api-author.service';
-import { reduxAction } from '../utils/action-creator';
 
 
 
@@ -55,7 +54,19 @@ const service= new ApiAuthorService();
 
 //export const getAllAuthors=reduxAction(service.getAllAuthors, "AUTHOR_LIST");
 
-export const getAllAuthors=()=>({ type:"AUTHOR_LIST", payload: service.getAllAuthors() });
+export const getAllAuthors=()=>{
+    
+    return { type:"AUTHOR_LIST", payload: service.getAllAuthors() }
+}
+
+
+export const getAuthorList= async ()=>{
+    const authors= await service.getAllAuthors();
+
+    return {type:"AUTHOR_LIST", payload: authors};
+}
+
+
 
 export const getAuthorById=(id:string)=>({type: "AUTHOR_SELECT", payload:service.getAuthorById(id)});
 

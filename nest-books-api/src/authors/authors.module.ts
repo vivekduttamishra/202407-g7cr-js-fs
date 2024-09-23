@@ -1,8 +1,15 @@
 import { Module } from '@nestjs/common';
-import { AuthorsController } from './controllers/authors.controller';
+import { AuthorsController } from './authors.controller';
+import { SequelizeModule } from '@nestjs/sequelize';
+import { Author } from 'src/models/author.model';
+import { AuthorService } from './author.service';
+import { SequelizeAuthorRepository } from './sequelize-author.repository';
 
 @Module({
-
-  controllers: [AuthorsController]
+  imports:[
+    SequelizeModule.forFeature([Author]),
+  ],
+  controllers: [AuthorsController],
+  providers: [AuthorService, SequelizeAuthorRepository]
 })
 export class AuthorsModule {}

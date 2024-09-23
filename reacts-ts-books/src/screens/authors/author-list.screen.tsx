@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import { Author } from '../../services/author';
 import { AuthorCard } from '../../components/author-card.component';
-import { getAllAuthors } from '../../reducers/authors.reducer';
-import { connect } from 'react-redux';
+import { getAllAuthors, getAuthorList } from '../../reducers/authors.reducer';
+import { connect, useDispatch, useSelector } from 'react-redux';
+import { ApiAuthorService } from '../../services/api-author.service';
 
 
 export interface AuthorListScreenProps {
@@ -10,13 +11,27 @@ export interface AuthorListScreenProps {
 }
 
 
-//const service =new ApiAuthorService();
+const service =new ApiAuthorService();
 
 export const AuthorListScreen = (props:any) => {
     console.log(`AuthorListScreen: ${props}`);
-      
+    
+    const authors:Author[]= useSelector((s:any)=>s.authors);
+
+    const dispatch  = useDispatch();
+
+
     useEffect(()=>{
-        props.getAllAuthors();
+        
+        // (async ()=>{
+        //     const action = await getAuthorList();
+        //     dispatch(action);
+        // })();
+
+       // dispatch({type:'DO_NOTHING'});
+
+       dispatch<any>(getAuthorList());
+
     },[]);
    
 
@@ -27,7 +42,7 @@ export const AuthorListScreen = (props:any) => {
             <h2>Author List Screen</h2>
             <div className='row'>
                 {
-                    props.authors.map((author:Author) => (
+                    authors.map((author:Author) => (
                         <div key={author.id} className='col col-md-4'>
                             <AuthorCard  author={author} />
                         </div>
@@ -46,6 +61,6 @@ const reduxStoreToProps = (store:any)=>{
     }
 }
 
-export default connect(reduxStoreToProps,{getAllAuthors})(AuthorListScreen);
+//export default connect(reduxStoreToProps,{getAllAuthors})(AuthorListScreen);
 
-//export default AuthorListScreen;
+export default AuthorListScreen;

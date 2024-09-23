@@ -1,7 +1,8 @@
 
 
 // const statusFormat={
-//     AUTHOR_LIST: {status:"PENDING"|"SUCCESS"|"ERROR", error:any,actioName:'AUTHOR_LIST' }
+//     AUTHOR_LIST: {status:"PENDING"|"SUCCESS"|"ERROR", error:any,actioName:'AUTHOR_LIST' },
+//     USER: {status:"PENDING"|"SUCCESS"|"ERROR", error:{message:"Invalid Credentials"}}
 // }
 
 import { useSelector } from "react-redux";

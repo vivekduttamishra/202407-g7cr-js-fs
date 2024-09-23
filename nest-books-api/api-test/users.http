@@ -1,20 +1,108 @@
+@url=http://localhost:8000/api
 
 ### Get All Authors
-GET http://localhost:5000/api/users
-
+GET {{url}}/users
+Authorization: BEARER eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlcyI6WyJ1c2VyIiwibW9kZXJhdG9yIl0sImVtYWlsIjoic2hpdmFuc2hpQGdtYWlsLmNvbSIsInN1YiI6IjU1ZjgwZTAzLTgxZTYtNDc5MC1hZTIwLWY3MWM0NWU1ZWNjYiIsImlhdCI6MTcyNjY4NDEzMCwiZXhwIjoxNzI2Njg3NzMwfQ.Y37a4PV8WQgcFjSdoqYOtIcHEH54OI3ISKXeAunQNJE
 
 ### Add a new user
+POST {{url}}/users
+Content-Type: application/json
 
-POST http://localhost:5000/api/users
+{
+    "name": "Vivek Dutta Mishra",
+    "email": "vivek@conceptarchitect.in",
+    "password": "p@ss#1",
+    "photo":"https://m.media-amazon.com/images/S/amzn-author-media-prod/2fuqj5h433n56ucdr3s5j1k2j9._SY450_CR0%2C0%2C450%2C450_.jpg",
+    "roles":["Admin","Author","User"]
+}
+
+### Add a secondary user
+POST {{url}}/users
+Content-Type: application/json
+
+{
+    "name": "Shivanshi Mishra",
+    "email": "shivanshi@gmail.com",
+    "password": "p@ss#1",
+    "photo":"https://randomuser.me/api/portraits/women/0.jpg",
+    "roles":["Admin","Author","User"]
+}
+
+### Add a third user
+POST {{url}}/users
+Content-Type: application/json
+
+{
+    "name": "Sanjay Mall",
+    "email": "sanjay@gmail.com",
+    "password": "p@ss#1",
+    "photo":"https://randomuser.me/api/portraits/men/33.jpg",
+    "roles":["Admin","Author","User"]
+}
+
+### DELETE USER sanjay
+DELETE {{url}}/users/sanjay@gmail.com
 
 
-### Login a USER
-POST http://localhost:5000/api/token
+### DELETE USER shivanshi
+DELETE {{url}}/users/shivanshi@gmail.com
+
+###a Add roles to user
+PATCH {{url}}/users/shivanshi@gmail.com/roles
+Content-Type: application/json
+
+{
+    "add": ["Reviewer","Moderator"]
+    
+}
+
+###a Remove roles to user
+PATCH {{url}}/users/shivanshi@gmail.com/roles
+Content-Type: application/json
+
+{
+    "remove": ["Reviewer"]
+    
+}
+
+
+### Login a USER WITH WRONG EMAIL
+POST {{url}}/token
 Content-Type: application/json
 
 {
     "email":"john@example.com",
     "password":"password"
+
+}
+
+### Login a USER WITH WRONG PASSWORD
+POST {{url}}/token
+Content-Type: application/json
+
+{
+    "email":"vivek@conceptarchitect.in",
+    "password":"wrongpass"
+}
+
+
+### Login a USER WITH VALID CREDENTIAL
+POST {{url}}/token
+Content-Type: application/json
+
+{
+    "email":"vivek@conceptarchitect.in",
+    "password":"p@ss#1"
+}
+
+
+### Login a USER WITH VALID CREDENTIAL
+POST {{url}}/token
+Content-Type: application/json
+
+{
+    "email":"shivanshi@gmail.com",
+    "password":"p@ss#1"
 }
 
 
