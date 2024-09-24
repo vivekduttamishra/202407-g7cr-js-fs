@@ -12,7 +12,7 @@ import { InMemoryAuthorService } from '../../services/in-memory-author.service';
 import { LoadingAnimation } from '../../components/loading-animation.component';
 import { Status } from '../../components/status.component';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAuthorById } from '../../reducers/authors.reducer';
+import { getAuthorById, getAuthorById2 } from '../../reducers/authors.reducer';
 import { Async } from '../../components/async-component';
 
 
@@ -30,23 +30,31 @@ export const AuthorDetailsScreen = (props: AuthorDetailsScreenProps) => {
 
     // const {selectedAuthor,getAuthorById} = useAuthorContext();
     // const {status}= useStatusContext();
-    
-   
+
+
     let { id } = useParams();
-    let author= useSelector((s:any)=>s.author);
+    let author = useSelector((s: any) => s.author);
     let dispatch = useDispatch();
 
-    useEffect(()=>{
-        dispatch(getAuthorById(id!))
-    },[id,dispatch]); 
+    useEffect(() => {
+        //dispatch(getAuthorById(id!))
+        //getAuthorById2(id!)(dispatch);
+        dispatch<any>(getAuthorById2(id!));
 
-    console.log('AuthorDetailsScreen:author',author);
-    
-    return <Async actionName='AUTHOR_SELECT' >
-        <AuthorDetails visibility={true}
-            author={author}
-        />
-    </Async>
+    }, [id, dispatch]);
+
+    console.log('AuthorDetailsScreen:author', author);
+    if(author===null)
+        return <p>Loading...</p>;
+
+    if(author===undefined)
+        return <NotFound/>;
+
+
+    return<AuthorDetails visibility={true}
+        author={author}
+    />
+
 
     // return <AuthorDetails 
     //                 author={selectedAuthor}

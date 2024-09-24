@@ -1,5 +1,6 @@
 import { Author } from '../services/author';
 import { ApiAuthorService } from '../services/api-author.service';
+import { setStatus } from './status.reducer';
 
 
 
@@ -23,6 +24,34 @@ export const authorsReducer = (authors: Author[] = [], action: any) => {
     }
 
 }
+
+
+
+
+
+
+
+export const authorReducerActions:any={
+    intialState:null,
+    authorList(){      //action.type "authorList"
+        return null;
+    },
+    authorSelect(author:Author){ //action.type "authorSelect"
+        return {...author};
+    },
+}
+
+export const newAuthorReducer=(state:any,action:any)=>{
+
+    if(authorReducerActions[action.type]){
+        const result =authorReducerActions[action.type](action.payload);
+        return result;
+    }else{
+        return state;
+    }
+}
+
+
 
 export const authorReducer = (author: Author | null = null, action: any) => {
     switch (action.type) {
@@ -59,18 +88,44 @@ export const getAllAuthors=()=>{
     return { type:"AUTHOR_LIST", payload: service.getAllAuthors() }
 }
 
-
 export const getAuthorList= async ()=>{
     const authors= await service.getAllAuthors();
 
     return {type:"AUTHOR_LIST", payload: authors};
 }
 
+export const getAuthorById=(id:string)=>{
+    return {type: "AUTHOR_SELECT", payload:service.getAuthorById(id)}
+}
+
+export const getAuthorById2=(id:string)=>{
+
+    return async (dispatch:any)=>{
+        try{
+            const author = await service.getAuthorById(id);
+            dispatch({type:"AUTHOR_SELECT", payload:author});
+        }catch(err){
+            dispatch({type:"AUTHOR_SELECT", payload:undefined});
+        }   
+    }
+}
 
 
-export const getAuthorById=(id:string)=>({type: "AUTHOR_SELECT", payload:service.getAuthorById(id)});
 
-export const addAuthor=(author:Author)=>({type: "AUTHOR_ADD", payload:service.addAuthor(author)});
+export const addAuthor=(author:Author)=>{
+
+    return async (dispatch:any)=>{
+        try{
+
+            dispatch(setStatus("AUTHOR_ADD","PENDING"))
+            const result =await service.addAuthor(author);
+            dispatch(setStatus("AUTHOR_ADD","SUCCESS"));
+        }catch(err){
+            dispatch(setStatus("AUTHOR_ADD","ERROR",err));
+        }
+    }
+
+}
 
 export const removeAuthor=(id:string)=>({type: "AUTHOR_REMOVE", payload: service.removeAuthor(id)});
 

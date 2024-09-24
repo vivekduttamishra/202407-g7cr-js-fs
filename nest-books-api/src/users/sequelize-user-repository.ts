@@ -13,11 +13,11 @@ export class SequelizeUserRepository  {
   // Register a new user
   async registerUser(userDto: Partial<User>): Promise<User> {
     userDto.password = await bcrypt.hash(userDto.password, 10); // Hash password
-    return this.userModel.create(userDto);
+    return this.userModel.create(userDto); //insert into users
   }
 
   async getAllUsers(): Promise<User[]> {
-    return this.userModel.findAll();
+    return this.userModel.findAll(); //select * from
   }
 
   async updateUser(email: string, user: Partial<User>): Promise<[number, User[]]> {
@@ -27,7 +27,7 @@ export class SequelizeUserRepository  {
 
   // Find a user by email
   async findUserByEmail(email: string): Promise<User | null> {
-    return this.userModel.findOne({ where: { email } });
+    return (await this.userModel.findOne({ where: { email } })).toJSON();
   }
 
   async deleteUserByEmail(email: string):Promise<number>{

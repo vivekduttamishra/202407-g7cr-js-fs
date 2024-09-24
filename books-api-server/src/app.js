@@ -2,6 +2,8 @@
 let express = require('express');
 const cors = require('cors');
 var toJson = require('./utils/request-json');
+const fs = require('fs');
+const path = require('path');
 
 var {tokenInspector} = require('./utils/token-service');
 
@@ -25,6 +27,8 @@ async function createApp() {
     await db.connect();
 
     let app = express();
+
+    app.use(express.static("wwwroot"));
 
     app.use(cors());//enable CORS for all origins and headers.
     
@@ -55,6 +59,12 @@ async function createApp() {
     app.use("/api/authors", authorRoute); //add author route to the app.
     app.use("/api/users", usersRoute); //add author route to the app.
 
+
+    app.get("*", (request, response) => {
+
+        fs.createReadStream("wwwroot/index.html").pipe(response);
+
+    });
 
 
     //a default route exsits at the end of the pipeline.

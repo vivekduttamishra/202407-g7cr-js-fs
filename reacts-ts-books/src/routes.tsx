@@ -9,6 +9,8 @@ import  UserLoginScreen  from "./screens/user/user-login-screen";
 import { UserRegistrationScreen } from "./screens/user/user-register.screen";
 import { NotFoundScreen } from "./screens/not-found.screen";
 import WelcomeScreen  from "./screens/welcome.screen";
+import FormikLoginForm from "./screens/user/formik-login-screen";
+import SimpleUserLoginScreen from "./screens/user/simple-user-login-screen";
 
 
 export const routes=[
@@ -23,7 +25,7 @@ export const routes=[
     {path:"/book/details/:id", element:<BookDetailsScreen/>},
     {path:"/book/add", element:<BookAddScreen/>},
 
-    {path:"/user/login", element:<UserLoginScreen/>},
+    {path:"/user/login", element:<SimpleUserLoginScreen/>},
     {path:"/user/register", element:<UserRegistrationScreen/>},
     {path:"*", element:<NotFoundScreen/>}
 ];

@@ -2,17 +2,20 @@ import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post
 import { User } from 'src/models/user.model';
 import { UserService } from './user.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { Roles } from 'src/auth/roles.decorator';
 import { RolesGuard } from 'src/auth/roles.guard';
+import { Roles } from 'src/auth/roles.decorator';
+// import { Roles } from 'src/auth/roles.decorator';
+// import { RolesGuard } from 'src/auth/roles.guard';
 
 @Controller()
+  
 export class UsersController {
 
     constructor(private userService:UserService){}
 
     @Get('/api/users')
     @UseGuards(JwtAuthGuard,RolesGuard)
-    @Roles('admin','moderator')
+    @Roles('admin')  
     getAllUsers(){
         return this.userService.getAllUsers();
     }

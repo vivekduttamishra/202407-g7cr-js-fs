@@ -16,7 +16,7 @@ let _AuthorDetails=({author,onAuthorDelete}:AuthorDetailsProps)=>{
         <div>
            <h2>{author.name}</h2>
            <div className='row'>
-                <div className='col col-md-4'>
+                <div className='col col-md-12'>
                     <img className='author-image' src={author.photo} alt={author.name}/>
                     <p/>
                     <Authenticated roles={['moderator','admin']}>

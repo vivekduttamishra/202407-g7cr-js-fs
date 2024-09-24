@@ -6,7 +6,7 @@ GET {{url}}/authors
 
 
 ### Add New Author
-POST http://localhost:5000/api/authors
+POST {{url}}/authors
 Content-Type: application/json
 
 {

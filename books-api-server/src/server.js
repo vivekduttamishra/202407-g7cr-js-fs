@@ -2,7 +2,7 @@ require('dotenv').config(); //read .env file and merge into process.env
 
 var http = require('http');
 var createApp = require('./app');
-
+console.log('args',process.argv);
 const PORT = parseInt(process.env.PORT ?? 80);
 const SERVER = 'localhost';
 

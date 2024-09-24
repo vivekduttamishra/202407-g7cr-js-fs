@@ -5,7 +5,7 @@ const setup = (httpServer) => {
 
   const io = socketIo(httpServer, {
     cors: {
-      origin: 'http://localhost:4200', // Your Angular app's URL
+      origin: '*', // Your Angular app's URL
       methods: ['GET', 'POST']
     }
   });
@@ -14,14 +14,16 @@ const setup = (httpServer) => {
     console.log('New client connected');
 
     // Join a room for the specific book
-    socket.on('joinRoom', (bookId) => {
-      socket.join(bookId);
-      console.log(`Client joined room: ${bookId}`);
+    socket.on('joinRoom', (roomId) => {
+      socket.join(roomId);
+      console.log(`Client joined room: ${roomId}`);
     });
 
     // Broadcast a message to all clients in the same room
-    socket.on('sendMessage', (bookId, message) => {
-      io.to(bookId).emit('receiveMessage', message);
+    socket.on('clientMessage', (roomId, message) => {
+      
+      console.log('sending message to ',roomId, message);
+      io.to(roomId).emit('serverMessage', message);
     });
 
     socket.on('disconnect', () => {

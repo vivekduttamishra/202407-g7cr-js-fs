@@ -2,7 +2,7 @@
 
 ### Get All Authors
 GET {{url}}/users
-Authorization: BEARER eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlcyI6WyJ1c2VyIiwibW9kZXJhdG9yIl0sImVtYWlsIjoic2hpdmFuc2hpQGdtYWlsLmNvbSIsInN1YiI6IjU1ZjgwZTAzLTgxZTYtNDc5MC1hZTIwLWY3MWM0NWU1ZWNjYiIsImlhdCI6MTcyNjY4NDEzMCwiZXhwIjoxNzI2Njg3NzMwfQ.Y37a4PV8WQgcFjSdoqYOtIcHEH54OI3ISKXeAunQNJE
+Authorization: BEARER eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlcyI6WyJ1c2VyIiwibW9kZXJhdG9yIl0sImVtYWlsIjoic2hpdmFuc2hpQGdtYWlsLmNvbSIsInN1YiI6IjU1ZjgwZTAzLTgxZTYtNDc5MC1hZTIwLWY3MWM0NWU1ZWNjYiIsImlhdCI6MTcyNzE1OTE5NywiZXhwIjoxNzI3MTYyNzk3fQ.hGUYGXNEFUwglpNSqz-qLtTYOqvCKB8xyF0kGJy-N-U
 
 ### Add a new user
 POST {{url}}/users
@@ -96,12 +96,21 @@ Content-Type: application/json
 }
 
 
-### Login a USER WITH VALID CREDENTIAL
+### Login a USER WITH VALID MODERATOR CREDENTIAL
 POST {{url}}/token
 Content-Type: application/json
 
 {
     "email":"shivanshi@gmail.com",
+    "password":"p@ss#1"
+}
+
+### Login a USER WITH USER CREDENTIAL
+POST {{url}}/token
+Content-Type: application/json
+
+{
+    "email":"sanjay@gmail.com",
     "password":"p@ss#1"
 }
 

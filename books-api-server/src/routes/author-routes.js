@@ -1,6 +1,6 @@
 let express = require('express');
 const {handleRequest} = require('../utils/http-handler');
-const {authenticate} =require('../utils/token-service');
+const {authenticate, authorize} =require('../utils/token-service');
 
 
 //let authorRepository= require('../repositories/in-memory/in-memory-author-repository');
@@ -33,8 +33,8 @@ authors.route("/")
 
 authors.route("/:authorId")
     .get(handleRequest(authorController.getAuthorById))
-    .put(handleRequest(authorController.updateAuthor))
-    .delete(handleRequest(authorController.removeAuthor));
+    .put(authenticate,handleRequest(authorController.updateAuthor))
+    .delete(authorize('admin','moderator'),handleRequest(authorController.removeAuthor));
 
 authors
     .route("/:authorId/books")

@@ -4,6 +4,8 @@ import { Author } from '../../services/author';
 import { Status } from '../../components/status.component';
 import { useNavigate } from 'react-router-dom';
 import UserLoginScreen from '../user/user-login-screen';
+import { addAuthor } from '../../reducers/authors.reducer';
+import { useDispatch } from 'react-redux';
 
 
 export interface AuthorAddScreenProps {
@@ -27,6 +29,7 @@ export const _AuthorAddScreen = (props: AuthorAddScreenProps) => {
     // const {addAuthor} = useAuthorContext();
     // const {status,setStatus}=useStatusContext();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     useEffect(()=>{
        // setStatus("","READY","AUTHOR_ADD");
@@ -54,6 +57,7 @@ export const _AuthorAddScreen = (props: AuthorAddScreenProps) => {
         try{
             
             //await addAuthor(author);
+            addAuthor(author)(dispatch);
             
         }catch(err){
             //will automatically show error

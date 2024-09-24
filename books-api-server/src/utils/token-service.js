@@ -51,7 +51,7 @@ const tokenInspector = async (request, response, next) => {
 
         request.tokenError = err;
 
-        console.log('request.tokenError', request.tokenError);
+        //console.log('request.tokenError', request.tokenError);
 
     }
     next();
